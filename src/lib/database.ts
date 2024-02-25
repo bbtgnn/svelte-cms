@@ -3,7 +3,7 @@ import type { TObject } from '@sinclair/typebox';
 // // import type { StaticDecode } from '@sinclair/typebox';
 // import { Effect as _, ReadonlyRecord as R, pipe, ReadonlyArray as A } from 'effect';
 
-import get_entries_loaders from '../routes/(collections)';
+import get_entries_loaders from '$collections';
 
 export { get_entries_loaders };
 

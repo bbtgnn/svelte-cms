@@ -23,6 +23,10 @@ const config = {
 
 		paths: {
 			base: process.argv.includes('dev') ? '' : process.env.REPO_NAME
+		},
+
+		alias: {
+			$collections: './src/routes/(collections)'
 		}
 	}
 };
