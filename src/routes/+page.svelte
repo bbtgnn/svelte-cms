@@ -1,6 +1,4 @@
 <script lang="ts">
-	// import c from '$lib/collections/index';
-	// import dao from '$lib/dao';
 	import { db } from '$lib/index';
 	import { pipe, flow, ReadonlyArray as A, ReadonlyRecord as R, String as S } from 'effect';
 

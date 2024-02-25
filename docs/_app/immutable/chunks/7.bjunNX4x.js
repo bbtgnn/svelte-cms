@@ -1,0 +1,1 @@
+import{s as t}from"./scheduler.BvLojk_z.js";import{S as o,i as s}from"./index.BzAKJe6_.js";class a extends o{constructor(e){super(),s(this,e,null,null,t,{})}}const u=Object.freeze(Object.defineProperty({__proto__:null,default:a},Symbol.toStringTag,{value:"Module"}));export{a as P,u as _};
