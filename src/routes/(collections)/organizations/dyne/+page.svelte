@@ -1,8 +1,9 @@
 <script lang="ts" context="module">
+	// import {c} from '$lib/index'
 	// import { asset } from '$lib/utils';
-	import logo from './logo.jpeg';
+	// import logo from './logo.jpeg';
 
-	console.log(logo);
+	// console.log(logo);
 
 	export const props = {
 		name: 'Dyne.org',
@@ -14,4 +15,4 @@
 
 <pre>{JSON.stringify(props, null, 2)}</pre>
 
-<img src={logo} alt="dyne logo" />
+<img src="./logo.jpeg" alt="dyne logo" />

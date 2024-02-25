@@ -44,6 +44,7 @@
 		"@sinclair/typebox": "^0.32.14",
 		"@sveltejs/adapter-static": "^3.0.1",
 		"date-fns": "^3.3.1",
-		"effect": "^2.4.0"
+		"effect": "^2.4.0",
+		"svelte-preprocess-import-assets": "^1.1.0"
 	}
 }

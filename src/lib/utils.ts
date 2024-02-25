@@ -4,8 +4,3 @@ import { base } from '$app/paths';
 export const href = (route: string) => {
 	return base ? `${base}${route}` : route;
 };
-
-// export const asset = (route: string) => {
-// 	const s = import(route)
-// 	return route;
-// };
