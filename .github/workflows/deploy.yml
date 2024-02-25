@@ -19,7 +19,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-         node-version: 20
+          node-version: 20
           cache: pnpm
 
       - name: Install dependencies
@@ -30,7 +30,7 @@ jobs:
           REPO_NAME: '/${{ github.event.repository.name }}'
         run: |
           pnpm build
-  
+
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
@@ -42,7 +42,7 @@ jobs:
 
     permissions:
       pages: write
-        id-token: write
+      id-token: write
 
     environment:
       name: github-pages
