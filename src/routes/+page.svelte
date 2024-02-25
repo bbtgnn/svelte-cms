@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { db } from '$lib/index';
 	import { pipe, flow, ReadonlyArray as A, ReadonlyRecord as R, String as S } from 'effect';
 	import { href } from '$lib/utils';
@@ -14,6 +13,6 @@
 
 <div class="space-y-2 p-4">
 	{#each links as link}
-		<a class="anchor block" href={link}>{link}</a>
+		<a class="link block" href={link}>{link}</a>
 	{/each}
 </div>
