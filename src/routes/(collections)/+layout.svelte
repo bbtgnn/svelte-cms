@@ -1,5 +1,9 @@
-<div class="p-4 bg-surface-700">
-	<a class="anchor" href="/">← Home</a>
+<script>
+	import { href } from '$lib/utils';
+</script>
+
+<div class="bg-surface-700 p-4">
+	<a class="anchor" href={href('/')}>← Home</a>
 </div>
 
 <div class="p-4">
