@@ -3,11 +3,17 @@
 
 	export const data = db.create('work_experiences', {
 		date_start: '2022-10',
-		date_end: 'oggi',
+		current: true,
 		organization: 'dyne'
 	});
 </script>
 
+<pre>{JSON.stringify(data, null, 2)}</pre>
+
+<hr />
+
 {#await db.get('work_experiences', '2022-10_oggi_dyne') then res}
 	<pre>{JSON.stringify(res, null, 2)}</pre>
+{:catch e}
+	<pre>{JSON.stringify(e, null, 2)}</pre>
 {/await}

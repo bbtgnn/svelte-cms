@@ -3,7 +3,7 @@
 
 	export const data = db.create('work_experiences', {
 		date_start: '2021-05',
-		date_end: 'oggi',
+		current: true,
 		organization: 'sos'
 	});
 </script>
