@@ -1,9 +1,12 @@
-import type { TObject } from '@sinclair/typebox';
-// import { collections } from './config';
+import type { StaticDecode, TObject } from '@sinclair/typebox';
+import { collections } from './config';
 // // import type { StaticDecode } from '@sinclair/typebox';
 // import { Effect as _, ReadonlyRecord as R, pipe, ReadonlyArray as A } from 'effect';
 
 import get_entries_loaders from '$collections';
+import { pipe, ReadonlyRecord as R, ReadonlyArray as A, Option as O } from 'effect';
+// import { page } from '$app/stores';
+// import { get } from 'svelte/store';
 
 export { get_entries_loaders };
 
@@ -19,12 +22,46 @@ export type CollectionLoader = {
 
 // //
 
-// type CollectionName = keyof typeof collections;
-// type CollectionConfig<C extends CollectionName> = (typeof collections)[C];
-// // type CollectionType<C extends CollectionName> = StaticDecode<
-// // 	CollectionConfig<C>['content_schema']
-// // > &
-// // 	StaticDecode<CollectionConfig<C>['filename_schema']>;
+type CollectionName = keyof typeof collections;
+type CollectionConfig<C extends CollectionName> = (typeof collections)[C];
+type CollectionType<C extends CollectionName> = StaticDecode<
+	CollectionConfig<C>['content_schema']
+> &
+	StaticDecode<CollectionConfig<C>['filename_schema']>;
+
+//
+
+export interface CollectionService<C extends CollectionName> {
+	get_one: (id: string) => Promise<unknown>;
+	current?: () => Promise<CollectionType<C>>;
+}
+
+export function collection<C extends CollectionName>(name: C): CollectionService<C> {
+	return {
+		get_one: (slug: string) =>
+			pipe(
+				get_entries_loaders(),
+				R.toEntries,
+				A.filter(([entry_name]) => entry_name.includes(`${name}/${slug}`)),
+				A.head,
+				O.map(async ([, /* entry_name */ entry_loader]) => {
+					const o = await entry_loader();
+					console.log(o);
+					return o;
+				}),
+				O.getOrThrow
+			)
+		// const e =
+		// // const o = await import(`../routes/(collections)/${name}/${slug}/+page.svelte`);
+		// console.log(o);
+		// return o;
+
+		// async current() {
+		// 	const pageStore = get(page)
+		// 	pageStore.route
+		// }
+	};
+}
 
 // //
 
