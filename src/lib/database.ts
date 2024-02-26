@@ -45,10 +45,9 @@ function get_collection_schema<C extends CollectionName>(collection_name: C): Co
 export function create<C extends CollectionName>(
 	collection_name: C,
 	data: CollectionInput<C>
-): Collection<C> {
+): CollectionInput<C> {
 	const collection_schema = get_collection_schema(collection_name);
-	const parsed_value = Value.Decode(collection_schema, data);
-	return parsed_value;
+	return Value.Decode(collection_schema, data);
 }
 
 export function get<C extends CollectionName>(
@@ -73,10 +72,21 @@ async function parse_entry_loader<C extends CollectionName>(
 	collection_name: CollectionName,
 	entry_loader: EntryLoader
 ): Promise<Collection<C>> {
-	const collection_schema = get_collection_schema(collection_name);
-	const raw_data = await entry_loader();
-	const parsed_value = Value.Decode(T.Object({ data: collection_schema }), raw_data);
-	return parsed_value.data;
+	try {
+		const collection_schema = get_collection_schema(collection_name);
+		const entry = await entry_loader();
+		const entry_schema = T.Object({ data: T.Any() });
+		if (Value.Check(entry_schema, entry)) {
+			// ATTENZIONE QUI! il loader restituisce un getter! Capire bene come gestire
+			const encoded_data = Value.Encode(collection_schema, entry.data);
+			return Value.Decode(collection_schema, encoded_data);
+		} else {
+			throw new Error('Missing: export const data = db.create(...)');
+		}
+	} catch (e) {
+		console.log(e);
+		throw e;
+	}
 }
 
 // }
