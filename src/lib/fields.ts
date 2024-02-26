@@ -4,7 +4,7 @@ import type { CollectionName } from './config';
 
 /* Date */
 
-type DateFormats = 'yyyy_MM' | 'yyyy_MM_dd';
+type DateFormats = 'yyyy-MM' | 'yyyy-MM-dd';
 
 export const DateString = (dateFormat: DateFormats) =>
 	T.Transform(T.String()).Decode(stringToDate).Encode(dateToString(dateFormat));

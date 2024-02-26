@@ -25,9 +25,9 @@ export const collections = {
 	work_experiences: {
 		loader: () => import.meta.glob('./work_experiences/*/+page.svelte'),
 		filename_schema: T.Object({
-			date_start: F.DateString('yyyy_MM'),
-			date_end: T.Union([F.DateString('yyyy_MM'), T.Literal('oggi')]),
-			organizations: F.Relation('organizations')
+			date_start: F.DateString('yyyy-MM'),
+			date_end: T.Union([F.DateString('yyyy-MM'), T.Literal('oggi')]),
+			organization: F.Relation('organizations')
 		}),
 		content_schema: T.Object({})
 	}
