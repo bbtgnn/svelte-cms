@@ -1,6 +1,7 @@
 import { formatDate } from 'date-fns/format';
 import { Type as T } from '@sinclair/typebox';
 import type { CollectionName } from './config';
+import { db } from '$lib';
 
 /* Date */
 
@@ -35,5 +36,5 @@ function dateToString(dateFormat: string) {
 
 export const Relation = <C extends CollectionName>(collection: C) =>
 	T.Transform(T.String())
-		.Decode((id) => ({ collection, id }))
+		.Decode((id) => ({ collection, id, get: () => db.get(collection, id) }))
 		.Encode((entry) => entry.id);

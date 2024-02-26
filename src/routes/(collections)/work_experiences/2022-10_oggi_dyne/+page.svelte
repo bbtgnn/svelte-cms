@@ -12,8 +12,12 @@
 
 <hr />
 
-{#await db.get('work_experiences', '2022-10_oggi_dyne') then res}
-	<pre>{JSON.stringify(res, null, 2)}</pre>
+{#await db.get('work_experiences', '2022-10_oggi_dyne') then experience}
+	{#await experience.organization.get() then organization}
+		<pre>{JSON.stringify(organization, null, 2)}</pre>
+	{/await}
+	{experience.organization}
+	<pre>{JSON.stringify(experience, null, 2)}</pre>
 {:catch e}
 	<pre>{JSON.stringify(e, null, 2)}</pre>
 {/await}
