@@ -13,7 +13,6 @@ export const collections = {
 
 	work_experiences: T.Object({
 		date_start: F.DateString('yyyy-MM'),
-		// TODO - this union doesn't work with static decode!
 		date_end: T.Optional(F.DateString('yyyy-MM')),
 		current: T.Optional(T.Boolean()),
 		organization: F.Relation('organizations')
