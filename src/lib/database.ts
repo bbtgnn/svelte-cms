@@ -15,8 +15,8 @@ import {
 } from 'effect';
 import { Value } from '@sinclair/typebox/value';
 import { href } from './utils';
-// import { page } from '$app/stores';
-// import { get } from 'svelte/store';
+import { page as pageStore } from '$app/stores';
+import { get as getStoreValue } from 'svelte/store';
 
 //
 
@@ -64,6 +64,18 @@ export function get<C extends CollectionName>(
 		O.getOrThrow
 	);
 }
+
+export function page<C extends CollectionName>(collection_name: C): Promise<Collection<C>> {
+	const page = getStoreValue(pageStore);
+	const entry_name = pipe(
+		O.fromNullable(page.route.id),
+		O.flatMap(flow(S.replace('/+page.svelte', ''), S.split(`${collection_name}/`), A.last)),
+		O.getOrThrow
+	);
+	return get(collection_name, entry_name);
+}
+
+//
 
 type EntryLoader = () => Promise<unknown>;
 
