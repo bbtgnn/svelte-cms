@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 import type { Plugin } from 'vite';
-import { writeCollectionsTypes } from './src/lib/generate';
+import { saveCollectionTypes } from './src/lib/generate';
 
 export default defineConfig({
 	plugins: [sveltekit(), godo()],
@@ -16,7 +16,7 @@ function godo(): Plugin {
 		handleHotUpdate: async () => {
 			// const o = load();
 			// console.log(o);
-			await writeCollectionsTypes();
+			await saveCollectionTypes();
 		}
 	};
 }
