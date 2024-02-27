@@ -1,0 +1,19 @@
+{
+	"workbench.tree.indent": 20,
+	"explorer.sortOrder": "filesFirst",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
+	},
+	"editor.quickSuggestions": {
+		"strings": "on"
+	},
+	"workbench.iconTheme": "material-icon-theme",
+	"editor.minimap.enabled": false,
+	"editor.formatOnSave": true,
+	"svelte.enable-ts-plugin": true,
+	"workbench.colorTheme": "Material Theme High Contrast",
+	"workbench.colorCustomizations": {
+		"[Material Theme Palenight High Contrast]": {}
+	}
+}

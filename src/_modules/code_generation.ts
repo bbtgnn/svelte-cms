@@ -6,8 +6,8 @@ import type { Plugin } from 'vite';
 
 //
 
-const collections_directory = 'src/routes/(collections)';
-const output_directory = 'src/lib/database_index.ts';
+const collections_directory = 'src/routes/(database)';
+const output_directory = 'src/_modules/database_index.ts';
 
 export function save_database_index_plugin(): Plugin {
 	return {
@@ -23,8 +23,6 @@ export function save_database_index_plugin(): Plugin {
 }
 
 export async function save_database_index(collections_directory: string, output_directory: string) {
-	console.log('running');
-
 	const o = pipe(
 		filter_directory_content_by_type(collections_directory, 'file', true),
 		Effect.map((file_path_array) =>
@@ -46,8 +44,7 @@ export async function save_database_index(collections_directory: string, output_
 		)
 	);
 	const res = await Effect.runPromise(o);
-	fs.writeFile(output_directory, export_default_template(JSON.stringify(res, null, 2)));
-	console.log(res);
+	await fs.writeFile(output_directory, export_default_template(JSON.stringify(res, null, 2)));
 }
 
 //

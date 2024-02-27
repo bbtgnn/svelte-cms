@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { db } from '$lib/index';
+	import { db } from '$modules';
 
 	const links = db.get_paths();
 </script>
