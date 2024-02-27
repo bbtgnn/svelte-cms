@@ -1,13 +1,20 @@
-import database_config from '../routes/(database)/config';
 import type { CollectionName } from './database';
+import database_config from '$database/config';
+import database_index from './database_index';
 
 type CollectionSchema<C extends CollectionName> = (typeof database_config)[C];
 type CollectionInput<C extends CollectionName> = StaticEncode<(typeof database_config)[C]>;
 type Collection<C extends CollectionName> = StaticDecode<(typeof database_config)[C]>;
 
+export type CollectionEntry<C extends CollectionName> = (typeof database_index)[C][number];
+
 function get_collection_schema<C extends CollectionName>(collection_name: C): CollectionSchema<C> {
 	return database_config[collection_name];
 }
+
+export type EntryResponse<C extends CollectionName> = Collection<C> & {
+	_content: ConstructorOfATypedSvelteComponent;
+};
 
 //
 
@@ -50,8 +57,8 @@ export function create<C extends CollectionName>(
 
 export function get<C extends CollectionName>(
 	collection_name: C,
-	entry_name: string
-): Promise<Collection<C>> {
+	entry_name: CollectionEntry<C>
+): Promise<EntryResponse<C>> {
 	return pipe(
 		get_entry_loaders(),
 		R.toEntries,
@@ -86,15 +93,15 @@ type EntryLoader = () => Promise<unknown>;
 async function parse_entry_loader<C extends CollectionName>(
 	collection_name: CollectionName,
 	entry_loader: EntryLoader
-): Promise<Collection<C>> {
+): Promise<EntryResponse<C>> {
 	try {
 		const collection_schema = get_collection_schema(collection_name);
 		const entry = await entry_loader();
-		const entry_schema = T.Object({ data: T.Any() });
+		const entry_schema = T.Object({ data: T.Any(), default: T.Any() });
 		if (Value.Check(entry_schema, entry)) {
 			// ATTENZIONE QUI! il loader restituisce un getter! Capire bene come gestire
 			const encoded_data = Value.Encode(collection_schema, entry.data);
-			return Value.Decode(collection_schema, encoded_data);
+			return { ...Value.Decode(collection_schema, encoded_data), _content: entry.default };
 		} else {
 			throw new Error('Missing: export const data = db.create(...)');
 		}
