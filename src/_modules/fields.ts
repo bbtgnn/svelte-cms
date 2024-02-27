@@ -1,6 +1,12 @@
 import { formatDate } from 'date-fns/format';
 import { Type as T } from '@sinclair/typebox';
 
+// export const String = T.String;
+// export const Number = T.Number;
+// export const Object = T.Object;
+// export const Optional = T.Optional;
+// export const Boolean = T.Boolean;
+
 // import tree from './database_index';
 // import type { CollectionEntry, CollectionName } from './database';
 // import { db } from '$lib';
