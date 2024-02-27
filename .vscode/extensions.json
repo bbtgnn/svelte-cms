@@ -1,0 +1,14 @@
+{
+	"recommendations": [
+		"EditorConfig.EditorConfig",
+		"dbaeumer.vscode-eslint",
+		"PKief.material-icon-theme",
+		"Equinusocio.vsc-material-theme",
+		"Cardinal90.multi-cursor-case-preserve",
+		"csstools.postcss",
+		"esbenp.prettier-vscode",
+		"svelte.svelte-vscode",
+		"bradlc.vscode-tailwindcss",
+		"YoavBls.pretty-ts-errors"
+	]
+}
