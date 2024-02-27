@@ -16,6 +16,7 @@
 {/await}
 
 <Entry collection="organizations" name="dyne" let:entry>
+	<p>{entry.location}</p>
 	<EntryContent />
 </Entry>
 
