@@ -1,4 +1,4 @@
-import { save_database_index_plugin } from './src/lib/generation';
+import { save_database_index_plugin } from './src/lib/code_generation';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 
