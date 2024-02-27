@@ -1,5 +1,8 @@
 import { formatDate } from 'date-fns/format';
 import { Type as T } from '@sinclair/typebox';
+import database_index from './database_index';
+import type { CollectionName } from './database';
+import type { CollectionEntry, EntryResponse } from './db';
 
 // export const String = T.String;
 // export const Number = T.Number;
@@ -9,7 +12,7 @@ import { Type as T } from '@sinclair/typebox';
 
 // import tree from './database_index';
 // import type { CollectionEntry, CollectionName } from './database';
-// import { db } from '$lib';
+import { db } from '$modules';
 
 /* Date */
 
@@ -42,12 +45,26 @@ function dateToString(dateFormat: string) {
 
 /* Relation */
 
-// export const RelationX = <C extends CollectionName>(collection: C) =>
-// 	T.Union(tree[collection].map((item: CollectionEntry<C>) => T.Literal(item)));
+export function Relation<C extends CollectionName>(collection_name: C) {
+	const collection_entries = database_index[collection_name];
+	return T.Union(collection_entries.map((name) => BaseRelation(collection_name, name)));
+}
 
-export const Relation = () => T.String();
+export function BaseRelation<C extends CollectionName>(
+	collection_name: C,
+	entry_name: CollectionEntry<C>
+) {
+	return T.Transform(T.Literal(entry_name))
+		.Decode((id) => ({
+			collection: collection_name,
+			id,
+			get: () => db.get(collection_name, id)
+		}))
+		.Encode((entry) => entry.id);
+}
 
-// export const Relation = <C extends CollectionName>(collection: C) =>
-// 	T.Transform(T.Union(tree[collection].map((item: CollectionEntry<C>) => T.Literal(item))))
-// 		.Decode((id) => ({ collection, id, get: () => db.get(collection, id) }))
-// 		.Encode((entry) => entry.id);
+export type BaseRelationTransform<C extends CollectionName> = {
+	collection: C;
+	id: CollectionEntry<C>;
+	get: () => Promise<EntryResponse<C>>;
+};

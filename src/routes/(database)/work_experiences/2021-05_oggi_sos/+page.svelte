@@ -4,6 +4,6 @@
 	export const data = db.create('work_experiences', {
 		date_start: '2021-05',
 		current: true,
-		organization: 'sos'
+		organization: 'la-scuola-open-source'
 	});
 </script>

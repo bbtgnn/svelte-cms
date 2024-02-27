@@ -2,6 +2,7 @@ export default {
   "organizations": [
     "dyne",
     "ff3300",
+    "freelance",
     "la-scuola-open-source"
   ],
   "projects": [

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Collection, db, Entry, EntryContent } from '$modules';
+	import Relation from '$modules/components/Relation.svelte';
 
 	const links = db.get_paths();
 </script>
@@ -46,7 +47,10 @@
 				{#if experience.current}
 					<div>oggi</div>
 				{/if}
-				{experience.organization}
+
+				<Relation relation={experience.organization} let:relation>
+					<pre>{JSON.stringify(relation, null, 2)}</pre>
+				</Relation>
 			</div>
 		{/each}
 	</div>
