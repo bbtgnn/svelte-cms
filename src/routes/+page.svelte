@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { db, Entry, EntryContent } from '$modules';
+	import { Collection, db, Entry, EntryContent } from '$modules';
 
 	const links = db.get_paths();
 </script>
@@ -23,3 +23,31 @@
 {#await import('$database/organizations/dyne/+page.svelte') then res}
 	<svelte:component this={res.default}></svelte:component>
 {/await}
+
+<hr />
+
+{#await db.get_collection('work_experiences') then work_experiences}
+	<div class="flex gap-2">
+		{#each work_experiences as experience}
+			<div class="rounded-lg border border-gray-300 p-4">
+				{#if experience.current}
+					<div>oggi</div>
+				{/if}
+				{experience.organization}
+			</div>
+		{/each}
+	</div>
+{/await}
+
+<Collection name="work_experiences" let:entries>
+	<div class="flex gap-2">
+		{#each entries as experience}
+			<div class="rounded-lg border border-gray-300 p-4">
+				{#if experience.current}
+					<div>oggi</div>
+				{/if}
+				{experience.organization}
+			</div>
+		{/each}
+	</div>
+</Collection>

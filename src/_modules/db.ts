@@ -70,6 +70,19 @@ export function get<C extends CollectionName>(
 	);
 }
 
+export function get_collection<C extends CollectionName>(
+	collection_name: C
+): Promise<Array<EntryResponse<C>>> {
+	return pipe(
+		get_entry_loaders(),
+		R.toEntries,
+		A.filter(([entry_path]) => entry_path.includes(`./${collection_name}`)),
+		A.map(([, /* entry_name */ entry_loader]) => entry_loader),
+		A.map((entry_loader) => parse_entry_loader(collection_name, entry_loader)),
+		(entry_promises) => Promise.all(entry_promises)
+	);
+}
+
 //
 
 import { page as pageStore } from '$app/stores';
@@ -82,7 +95,7 @@ export function page<C extends CollectionName>(collection_name: C): Promise<Coll
 		O.flatMap(flow(S.replace('/+page.svelte', ''), S.split(`${collection_name}/`), A.last)),
 		O.getOrThrow
 	);
-	return get(collection_name, entry_name);
+	return get(collection_name, entry_name as CollectionEntry<C>);
 }
 
 //
@@ -110,23 +123,3 @@ async function parse_entry_loader<C extends CollectionName>(
 		throw e;
 	}
 }
-
-// }
-
-// //
-
-// export const load_collection = <C extends CollectionName>(collection_name: C) =>
-// 	_.runPromise(
-// 		pipe(
-// 			collection_name,
-// 			get_collection_config,
-// 			(collection_config) => collection_config.loader(),
-// 			R.toEntries,
-// 			A.map(async ([entry_path, entry_loader]) => ({
-// 				path: entry_path,
-// 				data: await entry_loader()
-// 			})),
-// 			A.map((entry) => _.promise(() => entry)),
-// 			(entry_list) => _.all(entry_list)
-// 		)
-// 	);
