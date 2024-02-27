@@ -1,5 +1,5 @@
 <script>
-	import { href } from '$lib/utils';
+	import { href } from '$modules/utils';
 </script>
 
 <div class="bg-surface-700 p-4">

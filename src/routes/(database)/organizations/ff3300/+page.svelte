@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { db } from '$lib';
+	import { db } from '$modules';
 
 	export const data = db.create('organizations', {
 		name: 'Studio FF3300',

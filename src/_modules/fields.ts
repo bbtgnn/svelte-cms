@@ -1,9 +1,9 @@
 import { formatDate } from 'date-fns/format';
 import { Type as T } from '@sinclair/typebox';
 
-import tree from './types';
-import type { CollectionEntry, CollectionName } from './database';
-import { db } from '$lib';
+// import tree from './database_index';
+// import type { CollectionEntry, CollectionName } from './database';
+// import { db } from '$lib';
 
 /* Date */
 
@@ -36,10 +36,12 @@ function dateToString(dateFormat: string) {
 
 /* Relation */
 
-export const RelationX = <C extends CollectionName>(collection: C) =>
-	T.Union(tree[collection].map((item: CollectionEntry<C>) => T.Literal(item)));
+// export const RelationX = <C extends CollectionName>(collection: C) =>
+// 	T.Union(tree[collection].map((item: CollectionEntry<C>) => T.Literal(item)));
 
-export const Relation = <C extends CollectionName>(collection: C) =>
-	T.Transform(T.Union(tree[collection].map((item: CollectionEntry<C>) => T.Literal(item))))
-		.Decode((id) => ({ collection, id, get: () => db.get(collection, id) }))
-		.Encode((entry) => entry.id);
+export const Relation = () => T.String();
+
+// export const Relation = <C extends CollectionName>(collection: C) =>
+// 	T.Transform(T.Union(tree[collection].map((item: CollectionEntry<C>) => T.Literal(item))))
+// 		.Decode((id) => ({ collection, id, get: () => db.get(collection, id) }))
+// 		.Encode((entry) => entry.id);

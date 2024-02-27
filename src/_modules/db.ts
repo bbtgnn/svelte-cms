@@ -1,10 +1,19 @@
-import { type StaticDecode, type StaticEncode, Type as T } from '@sinclair/typebox';
-// import { Value as V } from '@sinclair/typebox/value';
-import { collections } from './config';
-// // import type { StaticDecode } from '@sinclair/typebox';
-// import { Effect as _, ReadonlyRecord as R, pipe, ReadonlyArray as A } from 'effect';
+import database_config from '../routes/(database)/config';
+import type { CollectionName } from './database';
 
-import get_entry_loaders from '$collections';
+type CollectionSchema<C extends CollectionName> = (typeof database_config)[C];
+type CollectionInput<C extends CollectionName> = StaticEncode<(typeof database_config)[C]>;
+type Collection<C extends CollectionName> = StaticDecode<(typeof database_config)[C]>;
+
+function get_collection_schema<C extends CollectionName>(collection_name: C): CollectionSchema<C> {
+	return database_config[collection_name];
+}
+
+//
+
+import { type StaticDecode, type StaticEncode, Type as T } from '@sinclair/typebox';
+import { Value } from '@sinclair/typebox/value';
+
 import {
 	pipe,
 	ReadonlyRecord as R,
@@ -13,17 +22,10 @@ import {
 	String as S,
 	flow
 } from 'effect';
-import { Value } from '@sinclair/typebox/value';
+
 import { href } from './utils';
-import { page as pageStore } from '$app/stores';
-import { get as getStoreValue } from 'svelte/store';
 
-//
-
-export type CollectionName = keyof typeof collections;
-export type CollectionSchema<C extends CollectionName> = (typeof collections)[C];
-export type CollectionInput<C extends CollectionName> = StaticEncode<(typeof collections)[C]>;
-export type Collection<C extends CollectionName> = StaticDecode<(typeof collections)[C]>;
+import get_entry_loaders from '$database/export';
 
 //
 
@@ -37,10 +39,6 @@ export function get_paths(): string[] {
 }
 
 //
-
-function get_collection_schema<C extends CollectionName>(collection_name: C): CollectionSchema<C> {
-	return collections[collection_name];
-}
 
 export function create<C extends CollectionName>(
 	collection_name: C,
@@ -64,6 +62,11 @@ export function get<C extends CollectionName>(
 		O.getOrThrow
 	);
 }
+
+//
+
+import { page as pageStore } from '$app/stores';
+import { get as getStoreValue } from 'svelte/store';
 
 export function page<C extends CollectionName>(collection_name: C): Promise<Collection<C>> {
 	const page = getStoreValue(pageStore);

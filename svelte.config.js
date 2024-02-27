@@ -27,7 +27,8 @@ const config = {
 		},
 
 		alias: {
-			$collections: './src/routes/(collections)'
+			$database: './src/routes/(database)',
+			$modules: './src/_modules'
 		}
 	}
 };

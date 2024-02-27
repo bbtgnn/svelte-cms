@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { db } from '$lib';
+	import { db } from '$modules';
 </script>
 
 {#await db.page('work_experiences') then page}
