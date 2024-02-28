@@ -4,11 +4,11 @@ import database_index from './database_index';
 import type { CollectionName } from './database';
 import type { CollectionEntry, EntryResponse } from './db';
 
-// export const String = T.String;
-// export const Number = T.Number;
-// export const Object = T.Object;
-// export const Optional = T.Optional;
-// export const Boolean = T.Boolean;
+export const String = T.String;
+export const Number = T.Number;
+export const Object = T.Object;
+export const Optional = T.Optional;
+export const Boolean = T.Boolean;
 
 // import tree from './database_index';
 // import type { CollectionEntry, CollectionName } from './database';

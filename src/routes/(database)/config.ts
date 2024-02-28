@@ -1,21 +1,20 @@
-import { Type as T } from '@sinclair/typebox';
 import * as F from '$modules/fields';
 import { database } from '$modules';
 
 //
 
 export default database({
-	organizations: T.Object({
-		name: T.String(),
-		location: T.String()
+	organizations: F.Object({
+		name: F.String(),
+		location: F.String()
 	}),
 
-	work_experiences: T.Object({
+	work_experiences: F.Object({
 		date_start: F.DateString('yyyy-MM'),
-		date_end: T.Optional(F.DateString('yyyy-MM')),
-		current: T.Optional(T.Boolean()),
+		date_end: F.Optional(F.DateString('yyyy-MM')),
+		current: F.Optional(F.Boolean()),
 		organization: F.Relation('organizations')
 	}),
 
-	projects: T.Object({})
+	projects: F.Object({})
 });
