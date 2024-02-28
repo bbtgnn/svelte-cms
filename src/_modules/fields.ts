@@ -1,6 +1,6 @@
 import { formatDate } from 'date-fns/format';
 import { Type as T } from '@sinclair/typebox';
-import database_index from './database_index';
+import { database_index, database_index_schema } from './database_index';
 import type { CollectionName } from './database';
 import type { CollectionEntry, EntryResponse } from './db';
 
@@ -45,16 +45,29 @@ function dateToString(dateFormat: string) {
 
 /* Relation */
 
-export function Relation<C extends CollectionName>(collection_name: C) {
+type Relation<C extends CollectionName> = (typeof database_index_schema)['properties'][C];
+
+// type O = CollectionEntries<'work_experiences'>;
+
+// // Map each element of tuple T to TLiteral
+// type MapLiteral<T extends readonly string[]> = {
+// 	[P in keyof T]: TLiteral<T[P]>;
+// };
+
+// // Remove readonly from type
+// type Writable<T> = { -readonly [P in keyof T]: T[P] };
+
+// type RelationLiterals<C extends CollectionName> = Writable<MapLiteral<CollectionEntries<C>>>;
+// type O = RelationLiterals<"organizations">
+
+export function BaseRelation<C extends CollectionName>(collection_name: C): Relation<C> {
 	const collection_entries = database_index[collection_name];
-	return T.Union(collection_entries.map((name) => BaseRelation(collection_name, name)));
+	// @ts-expect-error avoid ciccio
+	return T.Union(collection_entries.map((name: CollectionEntry<C>) => T.Literal(name)));
 }
 
-export function BaseRelation<C extends CollectionName>(
-	collection_name: C,
-	entry_name: CollectionEntry<C>
-) {
-	return T.Transform(T.Literal(entry_name))
+export function Relation<C extends CollectionName>(collection_name: C) {
+	return T.Transform(BaseRelation(collection_name))
 		.Decode((id) => ({
 			collection: collection_name,
 			id,
@@ -66,5 +79,5 @@ export function BaseRelation<C extends CollectionName>(
 export type BaseRelationTransform<C extends CollectionName> = {
 	collection: C;
 	id: CollectionEntry<C>;
-	get: () => Promise<EntryResponse<C>>;
+	get: () => EntryResponse<C>;
 };

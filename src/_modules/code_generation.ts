@@ -44,7 +44,7 @@ export async function save_database_index(collections_directory: string, output_
 		)
 	);
 	const res = await Effect.runPromise(o);
-	await fs.writeFile(output_directory, export_default_template(JSON.stringify(res, null, 2)));
+	await fs.writeFile(output_directory, file_template(res));
 }
 
 //
@@ -81,6 +81,37 @@ function filter_path_by_type(file_path: string, type: 'directory' | 'file') {
 	);
 }
 
-function export_default_template(content: string): string {
-	return `export default ${content} as const`;
+/* Templates */
+
+function file_template(database_index: Record<string, string[]>) {
+	return [
+		db_index_schema_template(database_index),
+		db_index_template(JSON.stringify(database_index, null, 2))
+	].join('\n\n');
+}
+
+function db_index_template(content: string): string {
+	return `export const database_index = ${content} as const`;
+}
+
+function db_index_schema_template(database_index: Record<string, string[]>) {
+	const rows = db_index_schema_rows_template(R.toEntries(database_index)).join(',\n\t');
+	return `
+import { Type as T } from '@sinclair/typebox';
+
+export const database_index_schema = T.Object({\n\t${rows}\n})`.trim();
+}
+
+function db_index_schema_rows_template(rows: [string, string[]][]): string[] {
+	return rows.map(([collection_name, entry_names]) =>
+		db_index_schema_row_template(collection_name, entry_names)
+	);
+}
+
+function db_index_schema_row_template(collection_name: string, entry_names: string[]): string {
+	return `${collection_name}: T.Union([${db_index_schema_value_template(entry_names).join(', ')}])`;
+}
+
+function db_index_schema_value_template(entry_names: string[]): string[] {
+	return entry_names.map((name) => `T.Literal('${name}')`);
 }

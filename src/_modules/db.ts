@@ -1,11 +1,12 @@
 import type { CollectionName } from './database';
 import database_config from '$database/config';
-import database_index from './database_index';
+import { database_index } from './database_index';
 
 type CollectionSchema<C extends CollectionName> = (typeof database_config)[C];
 type CollectionInput<C extends CollectionName> = StaticEncode<(typeof database_config)[C]>;
 type Collection<C extends CollectionName> = StaticDecode<(typeof database_config)[C]>;
 
+export type CollectionEntries<C extends CollectionName> = (typeof database_index)[C];
 export type CollectionEntry<C extends CollectionName> = (typeof database_index)[C][number];
 
 function get_collection_schema<C extends CollectionName>(collection_name: C): CollectionSchema<C> {
@@ -15,6 +16,8 @@ function get_collection_schema<C extends CollectionName>(collection_name: C): Co
 export type EntryResponse<C extends CollectionName> = Collection<C> & {
 	_content: ConstructorOfATypedSvelteComponent;
 };
+
+type O = Collection<'work_experiences'>;
 
 //
 

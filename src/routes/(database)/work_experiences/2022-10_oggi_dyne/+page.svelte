@@ -4,7 +4,7 @@
 	export const data = db.create('work_experiences', {
 		date_start: '2022-10',
 		current: true,
-		organization: 'ff3300'
+		organization: 'dyne'
 	});
 </script>
 
