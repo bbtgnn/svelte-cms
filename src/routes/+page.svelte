@@ -1,19 +1,24 @@
 <script lang="ts">
-	import { Collection, db, Entry, EntryContent } from '$modules';
-	import Relation from '$modules/components/Relation.svelte';
+	import { db } from '$modules/index';
+	import { onMount } from 'svelte';
 
-	const links = db.get_paths();
+	// const links = db.get_paths();
+	// const o = db.get_document('organizations', 'dyne');
 </script>
 
-<div class="space-y-2 p-4">
+<!-- <div class="space-y-2 p-4">
 	{#each links as link}
 		<a class="link block" href={link}>{link}</a>
 	{/each}
-</div>
+</div> -->
+
+<!-- <svelte:component this={o.content}></svelte:component>
+<pre>{JSON.stringify(o, null, 2)}</pre> -->
+<!--
 
 <Entry collection="organizations" name="dyne" let:entry>
 	<pre>{JSON.stringify(entry)}</pre>
-	<!-- <EntryContent /> -->
+	<EntryContent />
 </Entry>
 
 <hr />
@@ -32,4 +37,4 @@
 			</div>
 		{/each}
 	</div>
-</Collection>
+</Collection> -->

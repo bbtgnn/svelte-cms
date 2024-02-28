@@ -2,7 +2,7 @@
 	import { href } from '$modules/utils';
 </script>
 
-<div class="bg-surface-700 p-4">
+<div class="bg-stone-100 p-4">
 	<a class="link" href={href('/')}>← Home</a>
 </div>
 

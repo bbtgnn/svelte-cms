@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { db } from '$modules';
+	import { db } from '$modules/index';
 	import type { CollectionName } from '$modules/database';
 	import TransitionContainer from './TransitionContainer.svelte';
 

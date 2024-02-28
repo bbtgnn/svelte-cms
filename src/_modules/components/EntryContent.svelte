@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { getEntryContext } from './Entry.svelte';
+	import { getDocumentContext } from './Document.svelte';
 
 	export let content: ConstructorOfATypedSvelteComponent | undefined = undefined;
 
-	const context = getEntryContext();
+	const context = getDocumentContext();
 </script>
 
 {#if content}

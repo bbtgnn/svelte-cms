@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { db } from '$modules';
 
-	export const data = db.create('organizations', {
+	export const props = db.create('organizations', {
 		name: 'La Scuola Open Source',
 		location: 'Bari, Italia'
 	});
@@ -9,4 +9,4 @@
 
 <p>Mo bellissima la sos</p>
 
-<pre>{JSON.stringify(data, null, 2)}</pre>
+<!-- <pre>{JSON.stringify(data, null, 2)}</pre> -->

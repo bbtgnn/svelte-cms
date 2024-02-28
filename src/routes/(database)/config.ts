@@ -1,6 +1,6 @@
 import { Type as T } from '@sinclair/typebox';
 import * as F from '$modules/fields';
-import { database } from '$modules';
+import { database } from '$modules/database';
 
 //
 
