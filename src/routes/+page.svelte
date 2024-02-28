@@ -13,7 +13,7 @@
 
 <Entry collection="organizations" name="dyne" let:entry>
 	<pre>{JSON.stringify(entry)}</pre>
-	<!-- <EntryContent /> -->
+	<EntryContent />
 </Entry>
 
 <hr />
