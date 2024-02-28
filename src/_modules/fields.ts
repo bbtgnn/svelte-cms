@@ -1,6 +1,6 @@
 import { formatDate } from 'date-fns/format';
 import { Type as T } from '@sinclair/typebox';
-import { database_index, database_index_schema } from './database_index';
+import { database_index, database_index_schema } from '$modules/database_index';
 import type { CollectionName } from './database';
 import type { CollectionEntry, EntryResponse } from './db';
 
