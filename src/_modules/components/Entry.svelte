@@ -15,27 +15,17 @@
 <script lang="ts">
 	import { db } from '$modules';
 	import type { CollectionName } from '$modules/database';
-	import type { CollectionEntry, EntryResponse } from '$modules/db';
-	import TransitionContainer from './TransitionContainer.svelte';
+	import type { CollectionEntry } from '$modules/db';
 
 	type C = $$Generic<CollectionName>;
 
 	export let collection: C;
 	export let name: CollectionEntry<C>;
 
-	let className = '';
-	export { className as class };
-
-	async function loadEntry(collection: C, name: CollectionEntry<C>): Promise<EntryResponse<C>> {
-		const entry = await db.get(collection, name);
-		return entry;
-	}
+	const entry = db.get(collection, name);
+	setContext<EntryContext>(EntryContextKey, {
+		content: entry._content
+	});
 </script>
 
-{#await loadEntry(collection, name) then entry}
-	<TransitionContainer class={className}>
-		<slot {entry} />
-	</TransitionContainer>
-{:catch error}
-	<pre>{JSON.stringify(error, null, 2)}</pre>
-{/await}
+<slot {entry} />

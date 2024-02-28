@@ -38,7 +38,7 @@ import get_entry_loaders from '$database/export';
 
 export function get_paths(): string[] {
 	return pipe(
-		get_entry_loaders(),
+		get_entry_loaders,
 		R.toEntries,
 		A.map(([entry_path]) => entry_path),
 		A.map(flow(S.replace('/+page.svelte', ''), S.replace('./', '/'), href))
@@ -58,9 +58,9 @@ export function create<C extends CollectionName>(
 export function get<C extends CollectionName>(
 	collection_name: C,
 	entry_name: CollectionEntry<C>
-): Promise<EntryResponse<C>> {
+): EntryResponse<C> {
 	return pipe(
-		get_entry_loaders(),
+		get_entry_loaders,
 		R.toEntries,
 		A.filter(([entry_path]) => entry_path.includes(`${collection_name}/${entry_name}`)),
 		A.head,
@@ -72,14 +72,13 @@ export function get<C extends CollectionName>(
 
 export function get_collection<C extends CollectionName>(
 	collection_name: C
-): Promise<Array<EntryResponse<C>>> {
+): Array<EntryResponse<C>> {
 	return pipe(
-		get_entry_loaders(),
+		get_entry_loaders,
 		R.toEntries,
 		A.filter(([entry_path]) => entry_path.includes(`./${collection_name}`)),
 		A.map(([, /* entry_name */ entry_loader]) => entry_loader),
-		A.map((entry_loader) => parse_entry_loader(collection_name, entry_loader)),
-		(entry_promises) => Promise.all(entry_promises)
+		A.map((entry_loader) => parse_entry_loader(collection_name, entry_loader))
 	);
 }
 
@@ -88,7 +87,7 @@ export function get_collection<C extends CollectionName>(
 import { page as pageStore } from '$app/stores';
 import { get as getStoreValue } from 'svelte/store';
 
-export function page<C extends CollectionName>(collection_name: C): Promise<Collection<C>> {
+export function page<C extends CollectionName>(collection_name: C): Collection<C> {
 	const page = getStoreValue(pageStore);
 	const entry_name = pipe(
 		O.fromNullable(page.route.id),
@@ -100,21 +99,17 @@ export function page<C extends CollectionName>(collection_name: C): Promise<Coll
 
 //
 
-type EntryLoader = () => Promise<unknown>;
-
 // TODO - use effect
-async function parse_entry_loader<C extends CollectionName>(
+function parse_entry_loader<C extends CollectionName>(
 	collection_name: CollectionName,
-	entry_loader: EntryLoader
-): Promise<EntryResponse<C>> {
+	entry_loader: unknown
+): EntryResponse<C> {
 	try {
 		const collection_schema = get_collection_schema(collection_name);
-		const entry = await entry_loader();
 		const entry_schema = T.Object({ data: T.Any(), default: T.Any() });
-		if (Value.Check(entry_schema, entry)) {
-			// ATTENZIONE QUI! il loader restituisce un getter! Capire bene come gestire
-			const encoded_data = Value.Encode(collection_schema, entry.data);
-			return { ...Value.Decode(collection_schema, encoded_data), _content: entry.default };
+		if (Value.Check(entry_schema, entry_loader)) {
+			const encoded_data = Value.Encode(collection_schema, entry_loader.data);
+			return { ...Value.Decode(collection_schema, encoded_data), _content: entry_loader.default };
 		} else {
 			throw new Error('Missing: export const data = db.create(...)');
 		}

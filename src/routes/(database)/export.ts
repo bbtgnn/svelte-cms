@@ -1,1 +1,1 @@
-export default () => import.meta.glob('./*/*/+page.svelte');
+export default import.meta.glob('./*/*/+page.svelte', { eager: true });

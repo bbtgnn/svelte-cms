@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TransitionContainer from './TransitionContainer.svelte';
+	import { db } from '$modules';
 
 	import { type BaseRelationTransform } from '$modules/fields';
 	import type { CollectionName } from '$modules/database';
@@ -8,12 +8,7 @@
 
 	export let relation: BaseRelationTransform<C>;
 
-	let className = '';
-	export { className as class };
+	const rel = db.get(relation.collection, relation.id);
 </script>
 
-{#await relation.get() then relation}
-	<TransitionContainer class={className}>
-		<slot {relation} />
-	</TransitionContainer>
-{/await}
+<slot relation={rel} />
