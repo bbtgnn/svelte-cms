@@ -84,6 +84,7 @@ export function get_collection<C extends CollectionName>(
 			),
 			get_collection_schema(collection_name)
 		]),
+		Effect.tap((a) => Effect.sync(() => console.log(a))),
 		Effect.flatMap(([documents, schema]) =>
 			Effect.all(documents.map((doc) => parse_base_document(doc, schema)))
 		),
