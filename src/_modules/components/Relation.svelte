@@ -8,9 +8,7 @@
 
 	export let relation: BaseRelationTransform<C>;
 
-	console.log(relation);
 	const rel = db.get(relation.collection, relation.id);
-	// const rel = undefined;
 </script>
 
 <slot relation={rel} />
