@@ -6,7 +6,8 @@ import { database } from '$modules';
 export default database({
 	organizations: F.Object({
 		name: F.String(),
-		location: F.String()
+		location: F.String(),
+		logo: F.Optional(F.File())
 	}),
 
 	work_experiences: F.Object({

@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { db } from '$modules';
 
-	export const props = db.create('projects', {});
+	export const data = db.create('projects', {});
 </script>
 
 <article id="a4e7055c-9208-4458-9b73-e8804eda6b86" class="page sans">

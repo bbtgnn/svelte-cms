@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { db } from '$modules';
+	import { Entry, db } from '$modules';
 
 	export const data = db.create('work_experiences', {
 		date_start: '2022-10',
@@ -13,3 +13,7 @@
 		{organization.location}
 	{/await}
 {/await} -->
+
+<Entry collection="organizations" name={data.organization.id} let:entry>
+	<img src={entry.logo} alt="" />
+</Entry>

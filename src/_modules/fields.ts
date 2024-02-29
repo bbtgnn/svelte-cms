@@ -4,15 +4,18 @@ import { database_index, database_index_schema } from './database_index';
 import type { CollectionName } from './database';
 import type { CollectionEntry, EntryResponse } from './db';
 
+import { db } from '$modules';
+
 export const String = T.String;
 export const Number = T.Number;
 export const Object = T.Object;
 export const Optional = T.Optional;
 export const Boolean = T.Boolean;
+export const Union = T.Union;
+export const Literal = T.Literal;
 
 // import tree from './database_index';
 // import type { CollectionEntry, CollectionName } from './database';
-import { db } from '$modules';
 
 /* Date */
 
@@ -42,6 +45,10 @@ function dateToString(dateFormat: string) {
 		else return formatDate(v, dateFormat);
 	};
 }
+
+/* File */
+
+export const File = () => T.String({});
 
 /* Relation */
 

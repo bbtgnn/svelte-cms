@@ -13,6 +13,7 @@
 
 <Entry collection="organizations" name="dyne" let:entry>
 	<pre>{JSON.stringify(entry)}</pre>
+	<img src={entry.logo} />
 	<EntryContent />
 </Entry>
 
