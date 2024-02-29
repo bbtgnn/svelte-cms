@@ -87,18 +87,18 @@ export function get_collection<C extends CollectionName>(
 		Effect.flatMap(([documents, schema]) =>
 			Effect.all(documents.map((doc) => parse_base_document(doc, schema)))
 		),
-		Effect.map((documents) => {
-			if (options.sort) {
-				const sort = parse_sort_prop(options.sort);
-				return _.orderBy(
-					documents,
-					sort.keys.map((k) => `props.${k}`),
-					sort.orders
-				);
-			} else {
-				return documents;
-			}
-		}),
+		// Effect.map((documents) => {
+		// 	if (options.sort) {
+		// 		const sort = parse_sort_prop(options.sort);
+		// 		return _.orderBy(
+		// 			documents,
+		// 			sort.keys.map((k) => `props.${k}`),
+		// 			sort.orders
+		// 		);
+		// 	} else {
+		// 		return documents;
+		// 	}
+		// }),
 		Effect.runSync
 	);
 }
