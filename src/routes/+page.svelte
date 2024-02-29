@@ -3,7 +3,7 @@
 	import { db } from '$modules/index';
 
 	const links = db.get_paths();
-	const o = db.get_document('organizations', 'dyne');
+	const o = db.get_document('organizations', 'ff3300');
 </script>
 
 <div class="space-y-2 p-4">
