@@ -54,7 +54,7 @@ export function get_paths(): string[] {
 export function create<C extends CollectionName>(
 	collection_name: C,
 	data: CollectionInput<C>
-): CollectionInput<C> {
+): Collection<C> {
 	const collection_schema = get_collection_schema(collection_name);
 	return Value.Decode(collection_schema, data);
 }
