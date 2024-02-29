@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Collection, Document, Relation } from '$modules/components';
+	import DocumentContent from '$modules/components/DocumentContent.svelte';
 	import { db } from '$modules/index';
 
 	const links = db.get_paths();
@@ -32,8 +33,9 @@
 			<div class="rounded-lg border border-gray-300 p-4">
 				<pre>{JSON.stringify(experience, null, 2)}</pre>
 
-				<Relation relation={experience.props?.organization} let:relation>
-					<pre>{JSON.stringify(relation, null, 2)}</pre>
+				<Relation to={experience.props?.organization} let:doc>
+					<pre>{JSON.stringify(doc, null, 2)}</pre>
+					<DocumentContent />
 				</Relation>
 			</div>
 		{/each}
