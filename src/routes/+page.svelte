@@ -23,6 +23,8 @@
 
 <hr />
 
+<pre>{JSON.stringify(db.get_collection('organizations'), null, 2)}</pre>
+
 <Collection
 	name="work_experiences"
 	sort={[
