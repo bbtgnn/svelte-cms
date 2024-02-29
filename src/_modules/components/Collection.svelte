@@ -13,4 +13,4 @@
 	export let sort: SortProp<C> | undefined = undefined;
 </script>
 
-<slot entries={db.get_collection(name)} />
+<slot entries={db.get_collection(name, { sort })} />
