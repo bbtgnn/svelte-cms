@@ -18,13 +18,18 @@
 
 <hr />
 
-<Collection name="work_experiences" let:entries>
+<Collection
+	name="work_experiences"
+	let:entries
+	sort={[
+		['current', 'asc'],
+		['date_start', 'desc']
+	]}
+>
 	<div class="flex gap-2">
 		{#each entries as experience}
 			<div class="rounded-lg border border-gray-300 p-4">
-				{#if experience.current}
-					<div>oggi</div>
-				{/if}
+				<pre>{JSON.stringify(experience, null, 2)}</pre>
 
 				<Relation relation={experience.organization} let:relation>
 					<pre>{JSON.stringify(relation, null, 2)}</pre>

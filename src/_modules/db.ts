@@ -1,6 +1,7 @@
 import type { CollectionName } from './database';
 import database_config from '$database/config';
 import { database_index } from './database_index';
+import _ from 'lodash';
 
 type CollectionSchema<C extends CollectionName> = (typeof database_config)[C];
 type CollectionInput<C extends CollectionName> = StaticEncode<(typeof database_config)[C]>;
@@ -21,7 +22,7 @@ type O = Collection<'work_experiences'>;
 
 //
 
-import { type StaticDecode, type StaticEncode, Type as T } from '@sinclair/typebox';
+import { type StaticDecode, type StaticEncode, Type as T, type Static } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
 
 import {
@@ -73,15 +74,59 @@ export function get<C extends CollectionName>(
 	);
 }
 
+/* */
+
+export const sort_order_schema = T.Union([T.Literal('asc'), T.Literal('desc')]);
+export type SortOrder = Static<typeof sort_order_schema>;
+
+export const base_sort_prop_schema = T.Tuple([T.String(), sort_order_schema]);
+export type BaseSortProp<C extends CollectionName> = [keyof Collection<C>, SortOrder];
+export type SortProp<C extends CollectionName> = BaseSortProp<C> | BaseSortProp<C>[];
+
+export type ParsedSortProp = { keys: string[]; orders: SortOrder[] };
+
+type GetCollectionOptions<C extends CollectionName> = {
+	sort: SortProp<C>;
+};
+
+function parse_sort_prop<C extends CollectionName>(sortProp: SortProp<C>): ParsedSortProp {
+	if (Value.Check(base_sort_prop_schema, sortProp))
+		return {
+			keys: [sortProp[0]],
+			orders: [sortProp[1]]
+		};
+	else if (Value.Check(T.Array(base_sort_prop_schema), sortProp)) {
+		return {
+			keys: sortProp.map((base) => base[0]),
+			orders: sortProp.map((base) => base[1])
+		};
+	} else
+		return {
+			keys: [],
+			orders: []
+		};
+}
+
+//
+
 export function get_collection<C extends CollectionName>(
-	collection_name: C
+	collection_name: C,
+	options: Partial<GetCollectionOptions<C>> = {}
 ): Array<EntryResponse<C>> {
 	return pipe(
 		get_entry_loaders,
 		R.toEntries,
 		A.filter(([entry_path]) => entry_path.includes(`./${collection_name}`)),
 		A.map(([, /* entry_name */ entry_loader]) => entry_loader),
-		A.map((entry_loader) => parse_entry_loader(collection_name, entry_loader))
+		A.map((entry_loader) => parse_entry_loader(collection_name, entry_loader)),
+		(entries) => {
+			if (options.sort) {
+				const parsed = parse_sort_prop(options.sort);
+				return _.orderBy(entries, parsed.keys, parsed.orders);
+			} else {
+				return entries;
+			}
+		}
 	);
 }
 
