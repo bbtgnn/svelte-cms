@@ -1,19 +1,14 @@
 <script lang="ts">
 	import { db } from '$modules/index';
 	import type { CollectionName } from '$modules/database';
-	import TransitionContainer from './TransitionContainer.svelte';
+	import type { SortProp } from '$modules/db';
 
 	//
 
 	type C = $$Generic<CollectionName>;
-	export let name: C;
 
-	let className = '';
-	export { className as class };
+	export let name: C;
+	export let sort: SortProp<C> | undefined = undefined;
 </script>
 
-{#await db.get_collection(name) then entries}
-	<TransitionContainer class={className}>
-		<slot {entries} />
-	</TransitionContainer>
-{/await}
+<slot entries={db.get_collection(name, { sort })} />

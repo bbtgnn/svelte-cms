@@ -1,5 +1,5 @@
 import type { TAnySchema } from '@sinclair/typebox';
-import database_index from './database_index';
+import { database_index } from './database_index';
 
 //
 

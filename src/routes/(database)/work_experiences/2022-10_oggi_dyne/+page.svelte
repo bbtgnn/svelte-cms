@@ -1,10 +1,11 @@
 <script lang="ts" context="module">
 	import { db } from '$modules/index';
+	import { Document } from '$modules/components';
 
 	export const props = db.create('work_experiences', {
 		date_start: '2022-10',
 		current: true,
-		organization: 'ff3300'
+		organization: 'dyne'
 	});
 </script>
 
@@ -13,3 +14,8 @@
 		{organization.location}
 	{/await}
 {/await} -->
+
+<Document collection="organizations" name={props.organization.id} let:doc>
+	<pre>{JSON.stringify(doc, null, 2)}</pre>
+	<!-- <img src={entry.logo} alt="" /> -->
+</Document>

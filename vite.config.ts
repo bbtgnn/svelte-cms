@@ -6,5 +6,6 @@ export default defineConfig({
 	plugins: [sveltekit(), save_database_index_plugin()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
-	}
+	},
+	assetsInclude: ['**/*.bmp']
 });
