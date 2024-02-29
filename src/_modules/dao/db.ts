@@ -80,11 +80,11 @@ export function get_collection<C extends CollectionName>(
 		Effect.all([
 			pipe(
 				get_base_documents(),
+				Effect.tap((a) => Effect.sync(() => console.log(a))),
 				Effect.map(A.filter((doc) => doc.path.startsWith(`/${collection_name}`)))
 			),
 			get_collection_schema(collection_name)
 		]),
-		Effect.tap((a) => Effect.sync(() => console.log(a))),
 		Effect.flatMap(([documents, schema]) =>
 			Effect.all(documents.map((doc) => parse_base_document(doc, schema)))
 		),
