@@ -1,6 +1,6 @@
-import Entry from './Entry.svelte';
+import Document from './Document.svelte';
 import EntryContent from './EntryContent.svelte';
 import Collection from './Collection.svelte';
 import Relation from './Relation.svelte';
 
-export { Entry, EntryContent, Collection, Relation };
+export { Document, EntryContent, Collection, Relation };

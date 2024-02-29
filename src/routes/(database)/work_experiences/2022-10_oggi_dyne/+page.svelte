@@ -1,7 +1,8 @@
 <script lang="ts" context="module">
-	import { Entry, db } from '$modules';
+	import { db } from '$modules/index';
+	import { Document } from '$modules/components';
 
-	export const data = db.create('work_experiences', {
+	export const props = db.create('work_experiences', {
 		date_start: '2022-10',
 		current: true,
 		organization: 'dyne'
@@ -14,6 +15,7 @@
 	{/await}
 {/await} -->
 
-<Entry collection="organizations" name={data.organization.id} let:entry>
-	<img src={entry.logo} alt="" />
-</Entry>
+<Document collection="organizations" name={props.organization.id} let:doc>
+	<pre>{JSON.stringify(doc, null, 2)}</pre>
+	<!-- <img src={entry.logo} alt="" /> -->
+</Document>

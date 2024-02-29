@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { Collection, db, Entry, EntryContent } from '$modules';
-	import Relation from '$modules/components/Relation.svelte';
+	import { Collection, Document, Relation } from '$modules/components';
+	import { db } from '$modules/index';
 
 	const links = db.get_paths();
+	const o = db.get_document('organizations', 'dyne');
 </script>
 
 <div class="space-y-2 p-4">
@@ -11,28 +12,31 @@
 	{/each}
 </div>
 
-<Entry collection="organizations" name="dyne" let:entry>
-	<pre>{JSON.stringify(entry)}</pre>
-	<img src={entry.logo} />
-	<EntryContent />
-</Entry>
+<svelte:component this={o.content}></svelte:component>
+<pre>{JSON.stringify(o, null, 2)}</pre>
+
+<Document collection="organizations" name="dyne" let:doc>
+	<pre>{JSON.stringify(doc)}</pre>
+	<img alt="ciao" src={doc.props?.logo} />
+	<!-- <EntryContent /> -->
+</Document>
 
 <hr />
 
 <Collection
 	name="work_experiences"
-	let:entries
 	sort={[
 		['current', 'asc'],
 		['date_start', 'desc']
 	]}
+	let:entries
 >
 	<div class="flex gap-2">
 		{#each entries as experience}
 			<div class="rounded-lg border border-gray-300 p-4">
 				<pre>{JSON.stringify(experience, null, 2)}</pre>
 
-				<Relation relation={experience.organization} let:relation>
+				<Relation relation={experience.props?.organization} let:relation>
 					<pre>{JSON.stringify(relation, null, 2)}</pre>
 				</Relation>
 			</div>
