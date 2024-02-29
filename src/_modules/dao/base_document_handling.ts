@@ -34,8 +34,8 @@ export type BaseDocument<Props extends object = object> = {
 //
 
 function get_document_module_record(): Effect.Effect<DocumentModuleRecord, Error, never> {
-	const o = document_module_record();
-	if (Value.Check(document_module_record_schema, o)) return Effect.succeed(o);
+	if (Value.Check(document_module_record_schema, document_module_record))
+		return Effect.succeed(document_module_record);
 	else return Effect.fail(new Error('Invalid Vite glob import'));
 }
 

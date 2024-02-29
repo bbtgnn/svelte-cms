@@ -21,6 +21,7 @@ import {
 
 import { Value } from '@sinclair/typebox/value';
 import _ from 'lodash';
+import { base } from '$app/paths';
 
 //
 
@@ -80,26 +81,25 @@ export function get_collection<C extends CollectionName>(
 		Effect.all([
 			pipe(
 				get_base_documents(),
-				Effect.tap((a) => Effect.sync(() => console.log(a))),
-				Effect.map(A.filter((doc) => doc.path.startsWith(`/${collection_name}`)))
+				Effect.map(A.filter((doc) => doc.path.includes(`${base}/${collection_name}`)))
 			),
 			get_collection_schema(collection_name)
 		]),
 		Effect.flatMap(([documents, schema]) =>
 			Effect.all(documents.map((doc) => parse_base_document(doc, schema)))
 		),
-		// Effect.map((documents) => {
-		// 	if (options.sort) {
-		// 		const sort = parse_sort_prop(options.sort);
-		// 		return _.orderBy(
-		// 			documents,
-		// 			sort.keys.map((k) => `props.${k}`),
-		// 			sort.orders
-		// 		);
-		// 	} else {
-		// 		return documents;
-		// 	}
-		// }),
+		Effect.map((documents) => {
+			if (options.sort) {
+				const sort = parse_sort_prop(options.sort);
+				return _.orderBy(
+					documents,
+					sort.keys.map((k) => `props.${k}`),
+					sort.orders
+				);
+			} else {
+				return documents;
+			}
+		}),
 		Effect.runSync
 	);
 }
