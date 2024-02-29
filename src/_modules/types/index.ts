@@ -1,5 +1,5 @@
 import { database_index } from '$modules/database_index';
-import database_config from '$database/config';
+import database_config from '$database/_config';
 import type { StaticDecode, StaticEncode } from '@sinclair/typebox';
 import type { BaseDocument } from '../dao/base_document_handling';
 
