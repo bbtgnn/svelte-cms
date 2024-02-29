@@ -1,4 +1,4 @@
-import { pipe, Effect, ReadonlyArray as A, Option as O } from 'effect';
+import { pipe, Effect, ReadonlyArray as A } from 'effect';
 // Effect must be imported before other imports that use effect!
 
 import type {
@@ -56,17 +56,14 @@ export function create<C extends CollectionName>(
 export function get_document<C extends CollectionName>(
 	collection_name: C,
 	document_name: DocumentName<C>
-): Document<C> {
+): Document<C> | Error {
 	return pipe(
 		Effect.all([
 			get_base_document(`${collection_name}/${document_name}`),
 			get_collection_schema(collection_name)
 		]),
-		Effect.map(([base_document, schema]) => ({
-			base_document: O.getOrThrow(base_document), // TODO - Review
-			schema
-		})),
-		Effect.flatMap(({ base_document, schema }) => parse_base_document(base_document, schema)),
+		Effect.flatMap(([base_document, schema]) => parse_base_document(base_document, schema)),
+		Effect.catchAll((e) => Effect.succeed(e)),
 		Effect.runSync
 	);
 }

@@ -15,7 +15,7 @@
 	{/await}
 {/await} -->
 
-<Document collection="organizations" name={props.organization.id} let:doc>
+<Document collection="organizations" name={props.organization.document} let:doc>
 	<pre>{JSON.stringify(doc, null, 2)}</pre>
 	<!-- <img src={entry.logo} alt="" /> -->
 </Document>

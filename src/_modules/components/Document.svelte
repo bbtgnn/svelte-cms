@@ -14,7 +14,8 @@
 
 <script lang="ts" generics="C extends CollectionName">
 	import { db } from '$modules';
-	import type { DocumentName, CollectionName } from '$modules/types';
+	import type { DocumentName, CollectionName, Document } from '$modules/types';
+	import LogBanner from './LogBanner.svelte';
 
 	//
 
@@ -23,11 +24,16 @@
 
 	//
 
-	const doc = db.get_document(collection, name);
+	// * Ugly workaround * //
+	const doc = db.get_document(collection, name) as Document<C>;
 
 	setContext<DocumentContext>(DocumentContextKey, {
-		content: doc?.content
+		content: doc instanceof Error ? undefined : doc?.content
 	});
 </script>
 
-<slot {doc} />
+{#if doc instanceof Error}
+	<LogBanner content={doc} />
+{:else}
+	<slot {doc} />
+{/if}

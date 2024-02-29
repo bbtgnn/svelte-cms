@@ -67,7 +67,7 @@ export function get_base_documents(): Effect.Effect<BaseDocument[], Error, never
 
 export function get_base_document(
 	path_fragment: string
-): Effect.Effect<O.Option<BaseDocument>, Error, never> {
+): Effect.Effect<BaseDocument, Error, never> {
 	return pipe(
 		get_base_documents(),
 		Effect.map((base_documents) =>
@@ -76,6 +76,12 @@ export function get_base_document(
 				A.filter((doc) => doc.path.includes(path_fragment)),
 				A.head
 			)
+		),
+		Effect.flatMap((data) =>
+			Effect.try({
+				try: () => O.getOrThrow(data),
+				catch: () => new Error(`Document not found: ${path_fragment}`)
+			})
 		)
 	);
 }

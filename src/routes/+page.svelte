@@ -3,7 +3,6 @@
 	import { db } from '$modules/index';
 
 	const links = db.get_paths();
-	const o = db.get_document('organizations', 'ff3300');
 </script>
 
 <div class="space-y-2 p-4">
@@ -12,9 +11,6 @@
 	{/each}
 </div>
 
-<svelte:component this={o.content}></svelte:component>
-<pre>{JSON.stringify(o, null, 2)}</pre>
-
 <Document collection="organizations" name="dyne" let:doc>
 	<pre>{JSON.stringify(doc)}</pre>
 	<img alt="ciao" src={doc.props?.logo} />
@@ -22,8 +18,6 @@
 </Document>
 
 <hr />
-
-<pre>{JSON.stringify(db.get_collection('organizations'), null, 2)}</pre>
 
 <Collection
 	name="work_experiences"
