@@ -1,7 +1,5 @@
 import { pipe, Effect, ReadonlyArray as A, Option as O } from 'effect';
-// Effect must be the imported before other imports that use effect!
-
-import { Type as T, type Static } from '@sinclair/typebox';
+// Effect must be imported before other imports that use effect!
 
 import type {
 	Collection,
@@ -20,8 +18,8 @@ import {
 } from './base_document_handling';
 
 import { Value } from '@sinclair/typebox/value';
-import _ from 'lodash';
 import { base } from '$app/paths';
+import { sort_documents, type GetCollectionOptions } from './sorting';
 
 //
 
@@ -86,51 +84,11 @@ export function get_collection<C extends CollectionName>(
 			get_collection_schema(collection_name)
 		]),
 		Effect.flatMap(([documents, schema]) =>
-			Effect.all(documents.map((doc) => parse_base_document(doc, schema)))
+			pipe(
+				Effect.all(documents.map((doc) => parse_base_document(doc, schema))),
+				Effect.map((documents) => sort_documents(documents, options.sort))
+			)
 		),
-		Effect.map((documents) => {
-			if (options.sort) {
-				const sort = parse_sort_prop(options.sort);
-				return _.orderBy(
-					documents,
-					sort.keys.map((k) => `props.${k}`),
-					sort.orders
-				);
-			} else {
-				return documents;
-			}
-		}),
 		Effect.runSync
 	);
-}
-
-export const sort_order_schema = T.Union([T.Literal('asc'), T.Literal('desc')]);
-export type SortOrder = Static<typeof sort_order_schema>;
-
-export const base_sort_prop_schema = T.Tuple([T.String(), sort_order_schema]);
-export type BaseSortProp<C extends CollectionName> = [keyof Collection<C>, SortOrder];
-export type SortProp<C extends CollectionName> = BaseSortProp<C> | BaseSortProp<C>[];
-
-export type ParsedSortProp = { keys: string[]; orders: SortOrder[] };
-
-type GetCollectionOptions<C extends CollectionName> = {
-	sort?: SortProp<C>;
-};
-
-function parse_sort_prop<C extends CollectionName>(sortProp: SortProp<C>): ParsedSortProp {
-	if (Value.Check(base_sort_prop_schema, sortProp))
-		return {
-			keys: [sortProp[0]],
-			orders: [sortProp[1]]
-		};
-	else if (Value.Check(T.Array(base_sort_prop_schema), sortProp)) {
-		return {
-			keys: sortProp.map((base) => base[0]),
-			orders: sortProp.map((base) => base[1])
-		};
-	} else
-		return {
-			keys: [],
-			orders: []
-		};
 }

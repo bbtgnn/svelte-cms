@@ -9,6 +9,7 @@ import {
 
 import { Type as T, type Static, type TAnySchema, type StaticDecode } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
+
 import document_module_record from '$database/_export';
 
 import { href } from '../utils';
@@ -94,8 +95,7 @@ export function parse_base_document<T extends TAnySchema>(
 		},
 		catch: () => {
 			const errors = [...Value.Errors(schema, base_document.props)];
-			console.log(base_document, errors);
-			return new Error(`Parse error: ${base_document.path}`);
+			return new Error(`Parse error: ${base_document.path} \n ${JSON.stringify(errors, null, 2)}`);
 		}
 	});
 }

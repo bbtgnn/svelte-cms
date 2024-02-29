@@ -7,17 +7,17 @@ import type { Plugin } from 'vite';
 //
 
 const collections_directory = 'src/routes/(database)';
-const output_directory = 'src/_modules/database_index.ts';
+const output_file = 'src/_modules/database_index.ts';
 
 export function save_database_index_plugin(): Plugin {
 	return {
 		name: 'save_database_index',
 		buildStart: () => {
-			save_database_index(collections_directory, output_directory);
+			save_database_index(collections_directory, output_file);
 		},
 		handleHotUpdate: ({ file }) => {
-			if (file.includes(output_directory)) return;
-			save_database_index(collections_directory, output_directory);
+			if (file.includes(output_file)) return;
+			save_database_index(collections_directory, output_file);
 		}
 	};
 }

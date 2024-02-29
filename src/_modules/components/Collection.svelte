@@ -1,9 +1,8 @@
 <script lang="ts">
-	import type { SortProp } from '$modules/dao/db';
+	import type { SortProp } from '$modules/dao/sorting';
 
 	import { db } from '$modules/index';
 	import type { CollectionName } from '$modules/database';
-	// import type { SortProp } from '$modules/db';
 
 	//
 
