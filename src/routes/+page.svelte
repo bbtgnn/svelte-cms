@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Collection, Document, Relation } from '$modules/components';
 	import { db } from '$modules/index';
-	import { onMount } from 'svelte';
 
 	const links = db.get_paths();
 	const o = db.get_document('organizations', 'dyne');
@@ -19,20 +18,13 @@
 
 <Document collection="organizations" name="dyne" let:doc>
 	<pre>{JSON.stringify(doc)}</pre>
-	<img src={doc.logo} />
+	<img src={doc.props?.logo} />
 	<!-- <EntryContent /> -->
 </Document>
 
 <hr />
 
-<Collection
-	name="work_experiences"
-	let:entries
-	sort={[
-		['current', 'asc'],
-		['date_start', 'desc']
-	]}
->
+<Collection name="work_experiences" let:entries>
 	<div class="flex gap-2">
 		{#each entries as experience}
 			<div class="rounded-lg border border-gray-300 p-4">

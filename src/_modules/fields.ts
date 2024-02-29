@@ -2,7 +2,7 @@ import { formatDate } from 'date-fns/format';
 import { Type as T } from '@sinclair/typebox';
 import { database_index, database_index_schema } from './database_index';
 import type { CollectionName } from './database';
-import type { CollectionEntry, EntryResponse } from './db';
+import type { DocumentName, Document } from './types';
 
 import { db } from '$modules';
 
@@ -108,6 +108,6 @@ export function Relation<C extends CollectionName>(collection_name: C) {
 
 export type BaseRelationTransform<C extends CollectionName> = {
 	collection: C;
-	id: CollectionEntry<C>;
-	get: () => EntryResponse<C>;
+	id: DocumentName<C>;
+	get: () => Document<C>;
 };

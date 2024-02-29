@@ -83,12 +83,17 @@ export function parse_base_document<T extends TAnySchema>(
 ): Effect.Effect<BaseDocument<StaticDecode<T>>, Error, never> {
 	return Effect.try({
 		try: () => {
-			const parsed_props = Value.Decode(schema, base_document.props);
+			const encoded = Value.Encode(schema, base_document.props);
+			const decoded = Value.Decode(schema, encoded);
 			return {
 				...base_document,
-				props: parsed_props
+				props: decoded
 			};
 		},
-		catch: () => new Error(`Parse error: ${base_document.path}`)
+		catch: () => {
+			const errors = [...Value.Errors(schema, base_document.props)];
+			console.log(base_document, errors);
+			return new Error(`Parse error: ${base_document.path}`);
+		}
 	});
 }

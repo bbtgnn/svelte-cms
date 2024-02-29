@@ -6,9 +6,9 @@
 
 	type C = $$Generic<CollectionName>;
 
-	export let relation: BaseRelationTransform<C>;
-
-	const rel = db.get_document(relation.collection, relation.id);
+	export let relation: BaseRelationTransform<C> | undefined;
 </script>
 
-<slot relation={rel} />
+{#if relation}
+	<slot relation={db.get_document(relation?.collection, relation.id)} />
+{/if}
