@@ -1,6 +1,3 @@
-import { Type as T, type Static, type TAnySchema, type StaticDecode } from '@sinclair/typebox';
-import { Value } from '@sinclair/typebox/value';
-import document_module_record from '$database/export';
 import {
 	pipe,
 	Effect,
@@ -9,6 +6,11 @@ import {
 	Option as O,
 	String as S
 } from 'effect';
+
+import { Type as T, type Static, type TAnySchema, type StaticDecode } from '@sinclair/typebox';
+import { Value } from '@sinclair/typebox/value';
+import document_module_record from '$database/export';
+
 import { href } from '../utils';
 
 //
