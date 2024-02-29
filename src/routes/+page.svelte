@@ -3,7 +3,8 @@
 	import { onMount } from 'svelte';
 
 	// const links = db.get_paths();
-	// const o = db.get_document('organizations', 'dyne');
+	const o = db.get_document('organizations', 'dyne');
+	console.log(o);
 </script>
 
 <!-- <div class="space-y-2 p-4">

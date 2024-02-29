@@ -1,3 +1,6 @@
+import { pipe, Effect, ReadonlyArray as A, Option as O } from 'effect';
+// Effect must be the imported before other imports that use effect!
+
 import type {
 	Collection,
 	CollectionInput,
@@ -14,7 +17,6 @@ import {
 	parse_base_document
 } from './base_document_handling';
 
-import { pipe, Effect, ReadonlyArray as A, Option as O } from 'effect';
 import { Value } from '@sinclair/typebox/value';
 
 //
@@ -39,10 +41,6 @@ export function create<C extends CollectionName>(
 ): Collection<C> {
 	return pipe(
 		get_collection_schema(collection_name),
-		(e) => {
-			console.log(e);
-			return e;
-		},
 		Effect.flatMap((schema) =>
 			Effect.try({
 				try: () => Value.Decode(schema, data),

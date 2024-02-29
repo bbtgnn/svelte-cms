@@ -44,9 +44,11 @@
 		"@sinclair/typebox": "^0.32.14",
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@types/fs-extra": "^11.0.4",
+		"@types/lodash": "^4.14.202",
 		"date-fns": "^3.3.1",
 		"effect": "^2.4.0",
 		"fs-extra": "^11.2.0",
+		"lodash": "^4.17.21",
 		"svelte-preprocess-import-assets": "^1.1.0"
 	}
 }

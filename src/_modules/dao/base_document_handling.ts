@@ -9,12 +9,12 @@ import {
 	Option as O,
 	String as S
 } from 'effect';
-import { href } from '$modules/utils';
+import { href } from '../utils';
 
 //
 
 const document_module_schema = T.Object({
-	props: T.Object({}),
+	props: T.Optional(T.Object({})),
 	default: T.Any()
 });
 
@@ -24,7 +24,7 @@ type DocumentModuleRecord = Static<typeof document_module_record_schema>;
 //
 
 export type BaseDocument<Props extends object = object> = {
-	props: Props;
+	props?: Props;
 	path: string;
 	content: ConstructorOfATypedSvelteComponent;
 };
