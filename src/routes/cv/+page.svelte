@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Collection from '$modules/components/Collection.svelte';
-	import Document from '$modules/components/Document.svelte';
 	import Relation from '$modules/components/Relation.svelte';
 	import { href } from '$modules/utils';
 	import { formatDate } from 'date-fns/format';
@@ -15,13 +14,13 @@
 			{#if document.props?.current}
 				<div class="rounded-xl border border-stone-300 p-4">
 					<p>{document.props.roles.join(', ')}</p>
-					<Document
+					<Doc
 						collection={document.props.employer.collection}
 						name={document.props.employer.document}
 						let:doc
 					>
 						<p>{doc.props?.name}</p>
-					</Document>
+					</Doc>
 					<p>
 						<span>
 							{formatDate(document.props.date_start, 'MM / yyyy')}
@@ -30,7 +29,7 @@
 						<span> oggi </span>
 					</p>
 				</div>
-				<!-- <pre>{JSON.stringify(document, null, 2)}</pre> -->
+				<Doc collection="education" name="triennio-isia-urbino"></Doc>
 			{/if}
 		{/each}
 
@@ -39,13 +38,9 @@
 			{#if document.props?.date_end}
 				<div class="rounded-xl border border-stone-300 p-4">
 					<p>{document.props.roles.join(', ')}</p>
-					<Document
-						collection={document.props.employer.collection}
-						name={document.props.employer.document}
-						let:doc
-					>
+					<Doc collection="organizations" name={document.props.employer.document} let:doc>
 						<p>{doc.props?.name}</p>
-					</Document>
+					</Doc>
 					<p>
 						<span>
 							{formatDate(document.props.date_start, 'MM / yyyy')}
