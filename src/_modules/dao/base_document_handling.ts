@@ -62,10 +62,21 @@ function convert_document_module_record_to_base_documents(
 	);
 }
 
-export function get_base_documents(): Effect.Effect<BaseDocument[], Error, never> {
+type GetBaseDocumentOptions = {
+	path_includes: string | undefined;
+};
+
+export function get_base_documents(
+	options: Partial<GetBaseDocumentOptions> = {}
+): Effect.Effect<BaseDocument[], Error, never> {
 	return pipe(
 		get_document_module_record(),
-		Effect.map(convert_document_module_record_to_base_documents)
+		Effect.map(convert_document_module_record_to_base_documents),
+		Effect.map((documents) => {
+			const { path_includes } = options;
+			if (path_includes) return documents.filter((doc) => doc._path.includes(path_includes));
+			else return documents;
+		})
 	);
 }
 

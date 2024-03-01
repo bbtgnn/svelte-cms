@@ -1,4 +1,4 @@
-import { pipe, Effect, ReadonlyArray as A } from 'effect';
+import { pipe, Effect, ReadonlyArray as A, Either as E } from 'effect';
 // Effect must be imported before other imports that use effect!
 
 import type {
@@ -14,7 +14,8 @@ import database_config from '$database/_config';
 import {
 	get_base_document,
 	get_base_documents,
-	parse_base_document
+	parse_base_document,
+	type BaseDocument
 } from './base_document_handling';
 
 import { Value } from '@sinclair/typebox/value';
@@ -71,21 +72,38 @@ export function get_document<C extends CollectionName>(
 export function get_collection<C extends CollectionName>(
 	collection_name: C,
 	options: GetCollectionOptions<C> = {}
-): Document<C>[] {
+) {
 	return pipe(
 		Effect.all([
-			pipe(
-				get_base_documents(),
-				Effect.map(A.filter((doc) => doc._path.includes(`${base}/${collection_name}`)))
-			),
+			get_base_documents({ path_includes: `${base}/${collection_name}` }),
 			get_collection_schema(collection_name)
 		]),
-		Effect.flatMap(([documents, schema]) =>
+		Effect.flatMap(([documents, schema]) => parse_base_documents(documents, schema)),
+		Effect.map((documents) => sort_documents(documents, options.sort)),
+		Effect.runSync
+	);
+}
+
+function parse_base_documents<C extends CollectionName>(
+	documents: BaseDocument[],
+	schema: CollectionSchema<C>
+) {
+	return pipe(
+		documents,
+		A.map((doc) =>
 			pipe(
-				Effect.all(documents.map((doc) => parse_base_document(doc, schema))),
-				Effect.map((documents) => sort_documents(documents, options.sort))
+				parse_base_document(doc, schema),
+				Effect.either,
+				Effect.tap(
+					E.match({
+						onLeft: (e) => console.warn(e.message),
+						onRight: () => {}
+					})
+				)
 			)
 		),
-		Effect.runSync
+		Effect.all,
+		Effect.map(A.filter(E.isRight)),
+		Effect.map(A.map(E.getOrThrow))
 	);
 }
