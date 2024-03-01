@@ -12,6 +12,8 @@
 	{/each}
 </div>
 
+<a href="/cv" class="rounded-xl bg-blue-500 p-4 text-white">CV</a>
+
 <Document collection="organizations" name="dyne" let:doc>
 	<pre>{JSON.stringify(doc)}</pre>
 	<img alt="ciao" src={doc.props?.logo} />
