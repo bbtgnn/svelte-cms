@@ -16,8 +16,8 @@
 </script>
 
 {#if dev || $config.showLogBanners}
-	<div class="border border-stone-300 bg-stone-100 p-4 text-stone-800">
-		<name class="font-bold">{name}</name>
-		<p>{message}</p>
+	<div class="max-h-80 overflow-scroll border border-stone-300 bg-stone-100 p-4 text-stone-800">
+		<p class="mb-4 font-bold">{name}</p>
+		<pre>{message.trim()}</pre>
 	</div>
 {/if}
