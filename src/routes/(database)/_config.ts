@@ -14,8 +14,11 @@ export default database({
 		date_start: F.DateString('yyyy-MM'),
 		date_end: F.Optional(F.DateString('yyyy-MM')),
 		current: F.Optional(F.Boolean()),
-		organization: F.Relation('organizations')
+		employer: F.Relation('organizations'),
+		roles: F.Array(F.String())
 	}),
+
+	education: F.Object({}),
 
 	projects: F.Object({})
 });

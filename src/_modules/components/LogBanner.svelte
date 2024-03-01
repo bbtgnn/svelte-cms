@@ -15,7 +15,7 @@
 	}
 </script>
 
-{#if dev && $config.showLogBanners}
+{#if dev || $config.showLogBanners}
 	<div class="border border-stone-300 bg-stone-100 p-4 text-stone-800">
 		<name class="font-bold">{name}</name>
 		<p>{message}</p>

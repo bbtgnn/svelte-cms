@@ -15,7 +15,6 @@
 <Document collection="organizations" name="dyne" let:doc>
 	<pre>{JSON.stringify(doc)}</pre>
 	<img alt="ciao" src={doc.props?.logo} />
-	<!-- <EntryContent /> -->
 </Document>
 
 <hr />
@@ -31,9 +30,10 @@
 	<div class="flex gap-2">
 		{#each entries as experience}
 			<div class="rounded-lg border border-gray-300 p-4">
+				<!-- TODO: Componente come superdebug di superforms per testare i json, visibile solo in dev -->
 				<pre>{JSON.stringify(experience, null, 2)}</pre>
 
-				<Relation to={experience.props?.organization} let:doc>
+				<Relation to={experience.props?.employer} let:doc>
 					<pre>{JSON.stringify(doc, null, 2)}</pre>
 					<DocumentContent />
 				</Relation>

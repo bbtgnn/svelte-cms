@@ -14,6 +14,7 @@ export const Optional = T.Optional;
 export const Boolean = T.Boolean;
 export const Union = T.Union;
 export const Literal = T.Literal;
+export const Array = T.Array;
 
 /* Date */
 

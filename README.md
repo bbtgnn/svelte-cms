@@ -13,6 +13,11 @@ todo:
 
 - usare AI per tradurre i pdf in file svelte (e anche Notion)
 
+- import collection also from index.ts ( but also json and other, yaml!)
+
+syntax: export const document = create_document()
+typescript will take care of explaining
+
 ---
 
 - "inline" properties like:
