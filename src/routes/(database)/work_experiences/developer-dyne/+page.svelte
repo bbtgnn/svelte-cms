@@ -1,9 +1,10 @@
 <script lang="ts" context="module">
-	import { db } from '$modules/index';
+	import { db } from '$modules';
 
 	export const props = db.create('work_experiences', {
-		date_start: '2019-07',
+		date_start: '2022-10',
 		current: true,
-		organization: 'freelance'
+		employer: 'dyne',
+		roles: ['Sviluppatore web']
 	});
 </script>

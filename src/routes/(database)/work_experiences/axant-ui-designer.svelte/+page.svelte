@@ -2,9 +2,9 @@
 	import { db } from '$modules';
 
 	export const props = db.create('work_experiences', {
-		date_start: '2021-09',
-		date_end: '2022-03',
-		current: false,
-		organization: 'freelance'
+		date_start: '2021-07',
+		date_end: '2021-11',
+		employer: 'axant',
+		roles: ['UI/UX designer']
 	});
 </script>

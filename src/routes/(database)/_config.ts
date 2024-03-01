@@ -15,10 +15,18 @@ export default database({
 		date_end: F.Optional(F.DateString('yyyy-MM')),
 		current: F.Optional(F.Boolean()),
 		employer: F.Relation('organizations'),
-		roles: F.Array(F.String())
+		roles: F.Array(F.String()),
+		description: F.Optional(F.String())
 	}),
 
-	education: F.Object({}),
+	education: F.Object({
+		date_start: F.DateString('yyyy-MM'),
+		date_end: F.Optional(F.DateString('yyyy-MM')),
+		current: F.Optional(F.Boolean()),
+		institution: F.Relation('organizations'),
+		title: F.String(),
+		description: F.Optional(F.String())
+	}),
 
 	projects: F.Object({})
 });
