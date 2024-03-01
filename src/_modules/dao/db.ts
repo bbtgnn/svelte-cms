@@ -34,7 +34,7 @@ function get_collection_schema<C extends CollectionName>(
 //
 
 export function get_paths(): string[] {
-	return pipe(get_base_documents(), Effect.map(A.map((doc) => doc.path)), Effect.runSync);
+	return pipe(get_base_documents(), Effect.map(A.map((doc) => doc._path)), Effect.runSync);
 }
 
 export function create<C extends CollectionName>(
@@ -76,7 +76,7 @@ export function get_collection<C extends CollectionName>(
 		Effect.all([
 			pipe(
 				get_base_documents(),
-				Effect.map(A.filter((doc) => doc.path.includes(`${base}/${collection_name}`)))
+				Effect.map(A.filter((doc) => doc._path.includes(`${base}/${collection_name}`)))
 			),
 			get_collection_schema(collection_name)
 		]),

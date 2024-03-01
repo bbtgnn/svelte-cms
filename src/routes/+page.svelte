@@ -19,8 +19,16 @@
 
 		<Document collection="organizations" name="dyne" let:doc>
 			<pre>{JSON.stringify(doc)}</pre>
-			<img alt="ciao" src={doc.props?.logo} />
+			<img alt="ciao" src={doc.logo} />
 		</Document>
+
+		<Document collection="organizations" name="mimmo" let:doc>
+			{doc.location}
+		</Document>
+
+		<Collection name="organizations" let:documents>
+			<pre>{JSON.stringify(documents)}</pre>
+		</Collection>
 
 		<hr />
 
@@ -38,7 +46,7 @@
 						<!-- TODO: Componente come superdebug di superforms per testare i json, visibile solo in dev -->
 						<pre>{JSON.stringify(experience, null, 2)}</pre>
 
-						<Relation to={experience.props?.employer} let:doc>
+						<Relation to={experience.employer} let:doc>
 							<pre>{JSON.stringify(doc, null, 2)}</pre>
 							<DocumentContent />
 						</Relation>

@@ -6,6 +6,7 @@ import {
 	Option as O,
 	String as S
 } from 'effect';
+import _ from 'lodash';
 
 import { Type as T, type Static, type TAnySchema, type StaticDecode } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
@@ -26,10 +27,9 @@ type DocumentModuleRecord = Static<typeof document_module_record_schema>;
 
 //
 
-export type BaseDocument<Props extends object = object> = {
-	props?: Props;
-	path: string;
-	content: ConstructorOfATypedSvelteComponent;
+export type BaseDocument<Props extends object = object> = Props & {
+	_path: string;
+	_content: ConstructorOfATypedSvelteComponent;
 };
 
 //
@@ -50,11 +50,15 @@ function convert_document_module_record_to_base_documents(
 	return pipe(
 		document_module_record,
 		R.toEntries,
-		A.map(([path, module]) => ({
-			path: format_path(path),
-			props: module.props,
-			content: module.default
-		}))
+		A.map(([path, module]) =>
+			_.merge(
+				{
+					_path: format_path(path),
+					_content: module.default
+				},
+				module.props
+			)
+		)
 	);
 }
 
@@ -73,7 +77,7 @@ export function get_base_document(
 		Effect.map((base_documents) =>
 			pipe(
 				base_documents,
-				A.filter((doc) => doc.path.includes(path_fragment)),
+				A.filter((doc) => doc._path.includes(path_fragment)),
 				A.head
 			)
 		),
@@ -92,7 +96,7 @@ export function parse_base_document<T extends TAnySchema>(
 ): Effect.Effect<BaseDocument<StaticDecode<T>>, Error, never> {
 	return Effect.try({
 		try: () => {
-			const encoded = Value.Encode(schema, base_document.props);
+			const encoded = Value.Encode(schema, base_document);
 			const decoded = Value.Decode(schema, encoded);
 			return {
 				...base_document,
@@ -100,14 +104,14 @@ export function parse_base_document<T extends TAnySchema>(
 			};
 		},
 		catch: () => {
-			const errors = [...Value.Errors(schema, base_document.props)];
+			const errors = [...Value.Errors(schema, base_document)];
 			return new Error(`
 
 Parse error: 
-${base_document.path}
+${base_document._path}
 
 Provided value:
-${JSON.stringify(base_document.props, null, 2)}
+${JSON.stringify(base_document, null, 2)}
 
 Errors:
 ${JSON.stringify(errors, null, 2)}

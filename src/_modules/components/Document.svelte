@@ -28,7 +28,7 @@
 	const doc = db.get_document(collection, name) as Document<C>;
 
 	setContext<DocumentContext>(DocumentContextKey, {
-		content: doc instanceof Error ? undefined : doc?.content
+		content: doc instanceof Error ? undefined : doc._content
 	});
 </script>
 

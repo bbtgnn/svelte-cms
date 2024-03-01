@@ -9,50 +9,52 @@
 <a href={href('/')} class="button">Home</a>
 
 <Collection name="work_experiences" sort={['date_start', 'desc']} let:documents>
-	<div class="flex flex-col">
-		<h1>Esperienze lavorative attuali</h1>
-		{#each documents as document}
-			{#if document.props?.current}
-				<div class="rounded-xl border border-stone-300 p-4">
-					<p>{document.props.roles.join(', ')}</p>
-					<Document
-						collection={document.props.employer.collection}
-						name={document.props.employer.document}
-						let:doc
-					>
-						<p>{doc.props?.name}</p>
-					</Document>
-					<p>
-						<span>
-							{formatDate(document.props.date_start, 'MM / yyyy')}
-						</span>
-						<span>-></span>
-						<span> oggi </span>
-					</p>
-				</div>
-				<!-- <pre>{JSON.stringify(document, null, 2)}</pre> -->
-			{/if}
-		{/each}
+	<!--  -->
 
-		<h1>Esperienze lavorative passate</h1>
-		{#each documents as document}
-			{#if document.props?.date_end}
-				<div class="rounded-xl border border-stone-300 p-4">
-					<p>{document.props.roles.join(', ')}</p>
-					<Relation to={document.props.employer} let:doc>
-						<p>{doc.props?.location}</p>
-					</Relation>
+	<h1>Esperienze lavorative attuali</h1>
 
-					<p>
-						<span>
-							{formatDate(document.props.date_start, 'MM / yyyy')}
-						</span>
-						<span>-></span>
-						<span> oggi </span>
-					</p>
-				</div>
-				<!-- <pre>{JSON.stringify(document, null, 2)}</pre> -->
-			{/if}
-		{/each}
-	</div>
+	{#each documents as document}
+		{#if document.current}
+			<div class="rounded-xl border border-stone-300 p-4">
+				<p>{document.roles.join(', ')}</p>
+				<Document
+					collection={document.employer.collection}
+					name={document.employer.document}
+					let:doc
+				>
+					<p>{doc.name}</p>
+				</Document>
+				<p>
+					<span>
+						{formatDate(document.date_start, 'MM / yyyy')}
+					</span>
+					<span>-></span>
+					<span> oggi </span>
+				</p>
+			</div>
+		{/if}
+	{/each}
+
+	<!--  -->
+
+	<h1>Esperienze lavorative passate</h1>
+
+	{#each documents as document}
+		{#if document.date_end}
+			<div class="rounded-xl border border-stone-300 p-4">
+				<p>{document.roles.join(', ')}</p>
+				<Relation to={document.employer} let:doc>
+					<p>{doc.location}</p>
+				</Relation>
+
+				<p>
+					<span>
+						{formatDate(document.date_start, 'MM / yyyy')}
+					</span>
+					<span>-></span>
+					<span> oggi </span>
+				</p>
+			</div>
+		{/if}
+	{/each}
 </Collection>
