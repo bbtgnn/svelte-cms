@@ -18,6 +18,33 @@ todo:
 syntax: export const document = create_document()
 typescript will take care of explaining
 
+- <List data="<Array>" separator=", ">
+  Todo componente da fare.
+
+importare proprietà da filename
+funzione: crea_collezione<T extends TAnySchema>(
+schema: T
+properties: (data: StaticDecode<T>, db: DB) => Oggetto con funzioni / proprietà calcolate
+)
+all'interno
+T.Transform(schema).Decode(data => {...data, ...properties}).Encode(full_object => Value.Clean(schema))
+
+Ci sono da qualche parte specificati i locale
+F.Translate(schema: TAnySchema) =>
+{
+"it": schema,
+"en": schema,
+}
+\+ componente per tradurre
+
+-
+
+string[] or string field
+
+-
+
+make `Page` component that uses the $page store to get the current collection document
+
 ---
 
 - "inline" properties like:
