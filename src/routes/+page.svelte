@@ -27,10 +27,10 @@
 		['current', 'asc'],
 		['date_start', 'desc']
 	]}
-	let:entries
+	let:documents
 >
 	<div class="flex gap-2">
-		{#each entries as experience}
+		{#each documents as experience}
 			<div class="rounded-lg border border-gray-300 p-4">
 				<!-- TODO: Componente come superdebug di superforms per testare i json, visibile solo in dev -->
 				<pre>{JSON.stringify(experience, null, 2)}</pre>

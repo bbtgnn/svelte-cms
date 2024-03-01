@@ -12,4 +12,4 @@
 	export let sort: SortProp<C> | undefined = undefined;
 </script>
 
-<slot entries={db.get_collection(name, { sort })} />
+<slot documents={db.get_collection(name, { sort })} />
