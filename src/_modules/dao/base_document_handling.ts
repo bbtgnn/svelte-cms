@@ -101,7 +101,18 @@ export function parse_base_document<T extends TAnySchema>(
 		},
 		catch: () => {
 			const errors = [...Value.Errors(schema, base_document.props)];
-			return new Error(`Parse error: ${base_document.path} \n ${JSON.stringify(errors, null, 2)}`);
+			return new Error(`
+
+Parse error: 
+${base_document.path}
+
+Provided value:
+${JSON.stringify(base_document.props, null, 2)}
+
+Errors:
+${JSON.stringify(errors, null, 2)}
+
+`);
 		}
 	});
 }

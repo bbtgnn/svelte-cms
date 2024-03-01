@@ -46,7 +46,7 @@ export function create<C extends CollectionName>(
 		Effect.flatMap((schema) =>
 			Effect.try({
 				try: () => Value.Decode(schema, data),
-				catch: () => new Error(`Invalid data`)
+				catch: () => new Error(`Invalid data: ${JSON.stringify(data, null, 2)}`)
 			})
 		),
 		Effect.runSync

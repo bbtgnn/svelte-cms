@@ -4,7 +4,8 @@
 	export const props = db.create('education', {
 		date_start: '2008-09',
 		date_end: '2014-07',
-		institution: "Liceo Scientifico 'S. Simone'",
-		description: 'Diploma di maturità scientifica, 100/100 e Lode'
+		institution: 'liceo-scientifico-s-simone',
+		title: 'Diploma di maturità scientifica',
+		description: 'Votazione conseguita di 100/100 con lode'
 	});
 </script>

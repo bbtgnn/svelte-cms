@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" context="module">
 	import { db } from '$modules';
 
 	export const props = db.create('work_experiences', {
