@@ -2,7 +2,7 @@ import { Type as T } from '@sinclair/typebox';
 
 export const database_index_schema = T.Object({
 	education: T.Union([T.Literal('maturita-scientifica-sante-simone'), T.Literal('triennio-isia-urbino')]),
-	organizations: T.Union([T.Literal('axant'), T.Literal('dyne'), T.Literal('ff3300'), T.Literal('forkbomb'), T.Literal('freelance'), T.Literal('isia-urbino'), T.Literal('la-scuola-open-source'), T.Literal('liceo-scientifico-s-simone'), T.Literal('studio-ardito')]),
+	organizations: T.Union([T.Literal('axant'), T.Literal('dyne'), T.Literal('ff3300'), T.Literal('forkbomb'), T.Literal('freelance'), T.Literal('isia-urbino'), T.Literal('la-scuola-open-source'), T.Literal('liceo-scientifico-s-simone'), T.Literal('mimmo'), T.Literal('studio-ardito')]),
 	projects: T.Union([T.Literal('join'), T.Literal('reaction-diffusion'), T.Literal('scabec'), T.Literal('signroom')]),
 	work_experiences: T.Union([T.Literal('axant-ui-designer'), T.Literal('developer-dyne'), T.Literal('developer-forkbomb'), T.Literal('developer-sos'), T.Literal('ff3300-developer'), T.Literal('freelance-multi'), T.Literal('freelance-teacher'), T.Literal('sos-information-manager'), T.Literal('sos-workshop-organizer'), T.Literal('studio-ardito-designer')])
 })
@@ -21,6 +21,7 @@ export const database_index = {
     "isia-urbino",
     "la-scuola-open-source",
     "liceo-scientifico-s-simone",
+    "mimmo",
     "studio-ardito"
   ],
   "projects": [
