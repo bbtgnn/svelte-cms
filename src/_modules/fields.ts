@@ -23,6 +23,13 @@ type DateFormats = 'yyyy-MM' | 'yyyy-MM-dd';
 export const DateString = (dateFormat: DateFormats) =>
 	T.Transform(T.String()).Decode(stringToDate).Encode(dateToString(dateFormat));
 
+// TODO - Aggiungere funzioni come kirby
+// export const Date = (format: DateFormats) =>
+// 	T.Transform(T.String()).Decode((date_string) => ({
+// 		format: () => formatDate(date_string, format),
+// 		_raw: date_string
+// 	})).Encode(dateToString(format));
+
 // export const DateSpan = (dateFormat: DateFormats = 'yyyy-MM-dd') =>
 // 	T.Object({
 // 		date_start: DateString(dateFormat),

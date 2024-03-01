@@ -45,6 +45,11 @@ string[] or string field
 
 make `Page` component that uses the $page store to get the current collection document
 
+--
+
+check todo
+important transform function for fields
+
 ---
 
 - "inline" properties like:
