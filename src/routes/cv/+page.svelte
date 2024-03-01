@@ -39,13 +39,10 @@
 			{#if document.props?.date_end}
 				<div class="rounded-xl border border-stone-300 p-4">
 					<p>{document.props.roles.join(', ')}</p>
-					<Document
-						collection={document.props.employer.collection}
-						name={document.props.employer.document}
-						let:doc
-					>
-						<p>{doc.props?.name}</p>
-					</Document>
+					<Relation to={document.props.employer} let:doc>
+						<p>{doc.props?.location}</p>
+					</Relation>
+
 					<p>
 						<span>
 							{formatDate(document.props.date_start, 'MM / yyyy')}
