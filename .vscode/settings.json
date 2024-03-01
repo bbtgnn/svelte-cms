@@ -15,8 +15,5 @@
 	"workbench.colorTheme": "Material Theme High Contrast",
 	"workbench.colorCustomizations": {
 		"[Material Theme Palenight High Contrast]": {}
-	},
-	"svelte.plugin.svelte.compilerWarnings": {
-		"missing-declaration": "ignore"
 	}
 }

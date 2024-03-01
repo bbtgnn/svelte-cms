@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Collection, Relation } from '$modules/components';
+	import { Collection, Document, Relation } from '$modules/components';
 	import DocumentContent from '$modules/components/DocumentContent.svelte';
 	import { db } from '$modules/index';
 	import { href } from '$modules/utils';
@@ -17,10 +17,10 @@
 	<div>
 		<a href={href('/cv')} class="button">CV</a>
 
-		<Doc collection="organizations" name="dyne" let:doc>
+		<Document collection="organizations" name="dyne" let:doc>
 			<pre>{JSON.stringify(doc)}</pre>
 			<img alt="ciao" src={doc.props?.logo} />
-		</Doc>
+		</Document>
 
 		<hr />
 
