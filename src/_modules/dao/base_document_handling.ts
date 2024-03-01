@@ -9,7 +9,7 @@ import {
 import _ from 'lodash';
 
 import { Type as T, type Static, type TAnySchema, type StaticDecode } from '@sinclair/typebox';
-import { Value } from '@sinclair/typebox/value';
+import { Value, type ValueError } from '@sinclair/typebox/value';
 
 import document_module_record from '$database/_export';
 
@@ -118,16 +118,23 @@ export function parse_base_document<T extends TAnySchema>(
 			const errors = [...Value.Errors(schema, base_document)];
 			return new Error(`
 
-Parse error: 
+Processing error: 
 ${base_document._path}
 
 Provided value:
 ${JSON.stringify(base_document, null, 2)}
 
 Errors:
-${JSON.stringify(errors, null, 2)}
+${JSON.stringify(format_errors(errors), null, 2)}
 
 `);
 		}
 	});
+}
+
+function format_errors(errors: ValueError[]) {
+	return errors.map((e) => ({
+		message: e.message,
+		path: e.path
+	}));
 }
