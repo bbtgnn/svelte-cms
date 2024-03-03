@@ -9,6 +9,7 @@
 		"esbenp.prettier-vscode",
 		"svelte.svelte-vscode",
 		"bradlc.vscode-tailwindcss",
-		"YoavBls.pretty-ts-errors"
+		"YoavBls.pretty-ts-errors",
+		"moalamri.inline-fold"
 	]
 }
