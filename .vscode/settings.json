@@ -3,7 +3,8 @@
 	"explorer.sortOrder": "filesFirst",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[svelte]": {
-		"editor.defaultFormatter": "svelte.svelte-vscode"
+		"editor.defaultFormatter": "svelte.svelte-vscode",
+		"inlineFold.regex": "(src|href)=(({(`|))|(['\"`]))(.*?)(\\2|(\\4)})"
 	},
 	"editor.quickSuggestions": {
 		"strings": "on"
