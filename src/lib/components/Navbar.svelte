@@ -2,6 +2,8 @@
 	import Link from '$lib/components/Link.svelte';
 </script>
 
-<div class="bg-stone-200 p-4">
-	<Link href="/" class="hover:underline">Giovanni Abbatepaolo</Link>
+<div class="p-4">
+	<div class="mx-auto max-w-7xl">
+		<Link href="/" class="hover:underline">🏠 Giovanni Abbatepaolo</Link>
+	</div>
 </div>

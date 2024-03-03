@@ -6,16 +6,18 @@
 
 <script lang="ts">
 	import Content from '$lib/components/layout/Content.svelte';
-	import Block from '$lib/components/layout/Block.svelte';
 	import Callout from '$lib/components/layout/Callout.svelte';
 	import A from '$lib/components/layout/A.svelte';
 	import Columns from '$lib/components/layout/Columns.svelte';
 	import Col from '$lib/components/layout/Col.svelte';
 	import Line from '$lib/components/layout/Line.svelte';
+	import Block from '$lib/components/layout/Block.svelte';
 </script>
 
 <Content>
-	<Block>
+	<Block align="left">ciao</Block>
+
+	<Block class="space-y-4">
 		<h1>Reaction–Diffusion</h1>
 
 		<p>
@@ -35,9 +37,13 @@
 			L’idea, quindi, era quella di lavorare sull’incontro tra tradizione (della tessitura) e
 			modernità (delle macchine elettroniche e della grafica generata al computer).
 		</p>
+	</Block>
 
-		<img src="./files/arazzi.jpeg" alt="A tile" style="max-width: 120%;" class="self-end" />
+	<Block align="right">
+		<img src="./files/arazzi.jpeg" alt="A tile" />
+	</Block>
 
+	<Block>
 		<p>
 			Ciò che accomuna la grafica generativa alla tessitura è quello di essere tecniche “discrete”.
 			Non è possibile avere linee continue e sinuose: ogni elemento deve essere disegnato su una
@@ -48,14 +54,13 @@
 			Pertanto, sia io che Roberto (pur avendo lavorato su direzioni diverse) abbiamo ragionato su
 			come valorizzare questo elemento “minimo”.
 		</p>
+	</Block>
 
-		<img
-			src="./files/reaction-diffusion-1B-05dpi.jpg"
-			alt=""
-			class="self-start"
-			style="max-width: 120%;"
-		/>
+	<Block align="left">
+		<img src="./files/reaction-diffusion-1B-05dpi.jpg" alt="" />
+	</Block>
 
+	<Block>
 		<Line />
 
 		<p>
@@ -104,7 +109,7 @@
 		<p>Con l’algoritmo sono state generate tre immagini, che sono state intessute negli arazzi.</p>
 	</Block>
 
-	<Block width={1.4}>
+	<Block>
 		<Columns>
 			<Col>
 				<img src="./files/reaction-diffusion-2A-14dpi.bmp" alt="" class="h-auto w-full" />
@@ -125,271 +130,22 @@
 		</p>
 	</Block>
 
-	<Block width={2}>
+	<Block>
 		<img src="./files/RF2A1969_-__Triennale_Milano_-_foto_Gianluca_Di_Ioia.jpg" alt="" />
 	</Block>
 
-	<Block width={1.5}>
+	<Block>
 		<Columns>
 			<Col>
-				<video src="./files/video1-exp.mp4" autoplay controls></video>
+				<video src="./files/video1-exp.mp4" autoplay controls loop></video>
 			</Col>
 			<Col>
-				<video src="./files/video2-exp.mp4" autoplay controls></video>
+				<video src="./files/video2-exp.mp4" autoplay controls loop></video>
 			</Col>
 		</Columns>
 	</Block>
 
-	<Block width={1.2}>
+	<Block>
 		<img src="./files/RF2A1963_-__Triennale_Milano_-_foto_Gianluca_Di_Ioia.jpg" alt="" />
 	</Block>
 </Content>
-
-<!--
-
-<article id="a4e7055c-9208-4458-9b73-e8804eda6b86" class="page sans">
-	<header>
-		<img
-			class="page-cover-image"
-			src="./files/reaction-diffusion-2A-14dpi 1.bmp"
-			style="object-position:center 50%"
-		/>
-		<div class="page-header-icon page-header-icon-with-cover">
-			<img class="icon" src="https://www.notion.so/icons/microscope_gray.svg" />
-		</div>
-		<h1 class="page-title">Reaction–Diffusion</h1>
-		<p class="page-description"></p>
-		<table class="properties">
-			<tbody
-				><tr class="property-row property-row-multi_select"
-					><th
-						><span class="icon property-icon"
-							><svg
-								role="graphics-symbol"
-								viewBox="0 0 16 16"
-								style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0"
-								class="typesMultipleSelect"
-								><path
-									d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"
-								></path></svg
-							></span
-						>Tag</th
-					><td><span class="selected-value select-value-color-gray">Esposizione</span></td></tr
-				></tbody
-			>
-		</table>
-	</header>
-	<div class="page-body">
-		<div>
-			<p id="8af228d9-2421-45b3-bcd2-54f8d53f6432" class="block-color-blue">
-				<a href="https://www.notion.so/458ab8fdff2742bd817fdd6ac820e188?pvs=21"
-					>← Tutti i progetti</a
-				>
-			</p>
-			<hr id="cb54d6aa-7c70-4c39-929f-23e66cf3c7a0" />
-			<p id="38a15991-2566-463d-a2dc-7c63cbc616c9" class=""></p>
-		</div>
-		<p id="5b1e8fc9-b10f-4f22-af4d-7433adf6c27f" class="">
-			In occasione della mostra “<mark class="highlight-blue"
-				><a href="https://triennale.org/eventi/il-mestiere-di-grafico--oggi"
-					>Il mestiere di grafico – oggi</a
-				></mark
-			>” organizzata da Triennale Milano e AIAP, mi è stato proposto (assieme a Roberto Arista) di
-			realizzare un progetto sul tema della grafica programmata, in collaborazione con Lanificio
-			Leo.
-		</p>
-		<p id="f363c1bb-b4c2-4a38-bd6e-6ac85ab649a5" class=""></p>
-		<hr id="b71dd876-3214-4816-9d20-f6e0e0697ef4" />
-		<p id="f0976c5e-c6ee-4856-9445-06e23d18ad97" class=""></p>
-		<p id="f263055f-d52e-4e12-8415-ec47b90ad2e3" class="">
-			Lanificio Leo è la più antica azienda tessile calabrese, che si è dotata di macchine
-			elettroniche per la tessitura automatizzata.
-		</p>
-		<p id="62ec83be-1d41-46cc-8320-9eb2388e0721" class="">
-			L’idea, quindi, era quella di lavorare sull’incontro tra tradizione (della tessitura) e
-			modernità (delle macchine elettroniche e della grafica generata al computer).
-		</p>
-		<p id="e1ffeae7-9f50-45b6-8073-b9d1db182800" class=""></p>
-		<figure id="e64899ca-5b25-48ea-998a-a1aadde90fe4" class="image" style="text-align:right">
-			<a href="./files/WhatsApp_Image_2024-02-08_at_13.08.43_(2).jpeg"
-				><img style="width:816px" src="./files/WhatsApp_Image_2024-02-08_at_13.08.43_(2).jpeg" /></a
-			>
-		</figure>
-		<p id="25d5d4b4-1ea9-4679-b202-e005680edbd4" class=""></p>
-		<p id="7be604fc-aebc-4d98-9409-75d0836b3289" class="">
-			Ciò che accomuna la grafica generativa alla tessitura è quello di essere tecniche “discrete”.
-			Non è possibile avere linee continue e sinuose: ogni elemento deve essere disegnato su una
-			griglia fissa, utilizzando dei pixel (in un caso) o punti (nell’altro).
-		</p>
-		<p id="b3777955-18e9-45e1-adec-eb8a406bcf93" class="">
-			Pertanto, sia io che Roberto (pur avendo lavorato su direzioni diverse) abbiamo ragionato su
-			come valorizzare questo elemento “minimo”.
-		</p>
-		<p id="c4d67d25-24da-4402-b640-872f9675a737" class=""></p>
-		<figure id="ce386ff5-f55c-48aa-8c12-a3e3a223b4f0" class="image" style="text-align:left">
-			<a href="./files/reaction-diffusion-1B-05dpi.jpg"
-				><img style="width:864px" src="./files/reaction-diffusion-1B-05dpi.jpg" /></a
-			>
-		</figure>
-		<p id="40755458-9641-4a6e-93c0-d12794c2345a" class=""></p>
-		<hr id="92853e63-b23d-4fa2-ae54-c96d937f2061" />
-		<p id="db0b83c6-6555-4886-aecf-95408b102e51" class=""></p>
-		<p id="f375b333-075f-42d6-8c78-b9551211eb53" class="">
-			L’algoritmo di reazione–diffusione nasce nell’ambito della chimica computazionale per
-			descrivere l’interazione tra due reagenti (A e B, nero e bianco).
-		</p>
-		<p id="8a6d3938-99e8-4fcd-ac43-e9d812439a7c" class="">
-			Con il tempo si è scoperto che ha una grande varietà di utilizzi anche in altri ambiti: in
-			biologia viene utilizzato per descrivere la maculazione degli animali <mark
-				class="highlight-blue"><a href="https://pubmed.ncbi.nlm.nih.gov/12059958/">[→]</a></mark
-			><mark class="highlight-default">, la diffusione delle epidemie </mark><a
-				href="https://royalsocietypublishing.org/doi/10.1098/rspb.1986.0078"
-				><mark class="highlight-blue">[→]</mark></a
-			><mark class="highlight-default">, la crescita di tumori</mark><mark class="highlight-blue">
-			</mark><a href="https://doi.org/10.1142%2Fs0218339095000824"
-				><mark class="highlight-blue">[→]</mark></a
-			><mark class="highlight-default"> e non solo.</mark>
-		</p>
-		<p id="fb892a8e-135e-4206-955f-395d8ba07e6a" class=""></p>
-		<figure
-			class="block-color-gray_background callout"
-			style="white-space:pre-wrap;display:flex"
-			id="f77ee93c-43a2-4c52-8690-61169d8982fc"
-		>
-			<div style="font-size:1.5em"><span class="icon">💡</span></div>
-			<div style="width:100%">
-				Proprio come per la grafica digitale e l’arazzo, lo studio dell’algoritmo <strong
-					>avviene su una griglia.
-				</strong>È stato quindi naturale pensare di “applicarlo” sulla griglia dell’arazzo.
-			</div>
-		</figure>
-		<p id="e00316f9-f241-4f8a-a9d3-c5233b662891" class=""></p>
-		<div id="ce85abd5-3190-41f2-a853-307e02d10ddc" class="column-list">
-			<div id="75f7c63e-6a97-4e79-9a9e-e19f2ab3b1f8" style="width:62.5%" class="column">
-				<p id="da84b464-4878-4e24-a1b0-121c7cc6c529" class="">
-					Ogni cella della griglia contiene una certa quantità di reagente A e B.
-				</p>
-				<p id="5d1c6c91-d768-40ea-bd74-2ddb59127a55" class="">
-					I reagenti si spostano tra le varie celle e le loro quantità variano secondo determinate
-					equazioni.
-				</p>
-				<p id="1a64fee7-c564-4260-927b-ee6edc369d6f" class="">
-					Quando la concentrazione di A in una cella supera B, questa viene colorata di bianco – al
-					contrario, di nero.
-				</p>
-			</div>
-			<div id="be1e42d1-1560-45f5-be8b-8cda5a75bc2a" style="width:37.5%" class="column">
-				<figure id="6e238bcb-cddb-4e06-8f79-30a257c2f18e" class="image" style="text-align:right">
-					<a href="./files/rd-grid-cells.png"
-						><img style="width:252px" src="./files/rd-grid-cells.png" /></a
-					>
-				</figure>
-			</div>
-		</div>
-		<p id="fbd28153-4e46-4816-926f-1ec4d82293f8" class="">
-			Nonostante l’apparente semplicità di queste regole, le variazioni nei parametri delle
-			equazioni riescono a generare una grande quantità di effetti visivi.
-		</p>
-		<p id="88697402-a1ce-468a-bec9-adde4b0819c1" class=""></p>
-		<hr id="2f9c42c1-6599-4685-be93-1fce6d12db0a" />
-		<p id="6e356621-2a20-4a43-b1ff-8d8589c5b42c" class=""></p>
-		<p id="77be7392-d40f-4a7c-8a71-94db5c98bad3" class="">
-			Con l’algoritmo sono state generate tre immagini, che sono state intessute negli arazzi.
-		</p>
-		<div id="72b8bc6a-0a3d-4169-99dd-b95a4446036f" class="column-list">
-			<div
-				id="5b2db4c8-eb85-45a6-826b-b528a47334a9"
-				style="width:32.89473684210527%"
-				class="column"
-			>
-				<figure id="f9cac87a-5490-441a-b683-2a7b058f0246" class="image">
-					<a href="./files/reaction-diffusion-2A-14dpi.bmp"
-						><img style="width:560px" src="./files/reaction-diffusion-2A-14dpi.bmp" /></a
-					>
-				</figure>
-			</div>
-			<div
-				id="d369ec7c-8b11-4b44-9502-41d687426462"
-				style="width:33.33333333333333%"
-				class="column"
-			>
-				<figure id="194f858f-35e2-4992-bbed-7acfe0229b7d" class="image">
-					<a href="./files/reaction-diffusion-1B-05dpi.bmp"
-						><img style="width:480px" src="./files/reaction-diffusion-1B-05dpi.bmp" /></a
-					>
-				</figure>
-			</div>
-			<div id="22791c1c-0f3f-4a34-8d11-504139eedb61" style="width:33.7719298245614%" class="column">
-				<figure id="1f44f85f-1360-4704-bca8-9422c0c22822" class="image">
-					<a href="./files/reaction-diffusion-3B-14dpi.bmp"
-						><img style="width:560px" src="./files/reaction-diffusion-3B-14dpi.bmp" /></a
-					>
-				</figure>
-			</div>
-		</div>
-		<p id="ff4f2921-9bda-42cc-9f82-bb852115d3c7" class=""></p>
-		<p id="4fb371d3-e570-4e9c-b108-3edc77cfd277" class="">
-			Nell’ottica di contrapporre tradizione e modernità, agli arazzi appesi sono stati affiancati
-			dei monitor (di dimensione simile) che mostravano l’algoritmo “in movimento”.
-		</p>
-		<p id="e5f9aef9-161e-4d1a-8dea-a78eb475825e" class=""></p>
-		<figure id="bf184a26-7eaf-4b80-aeac-a0cbcfbd33f1" class="image">
-			<a href="./files/RF2A1969_-__Triennale_Milano_-_foto_Gianluca_Di_Ioia.jpg"
-				><img
-					style="width:960px"
-					src="./files/RF2A1969_-__Triennale_Milano_-_foto_Gianluca_Di_Ioia.jpg"
-				/></a
-			>
-		</figure>
-		<p id="20d8a3a0-9e40-47b4-b99b-0cc4a01198d1" class=""></p>
-		<div id="ff2edd16-d900-4954-adfd-40f405e2179b" class="column-list">
-			<div id="4c4fd7e4-7b22-4dcf-987d-d704e88e60b8" style="width:50%" class="column">
-				<figure id="11ea72be-a18a-4fb7-a0e7-1857326f9cc5">
-					<div class="source">
-						<a href="./files/video3-exp.mp4"
-							>https://prod-files-secure.s3.us-west-2.amazonaws.com/3479c0fa-74b8-42d2-9988-b96b70aa123c/61be4c4b-ea5b-410d-979e-0714c03ba441/video3-exp.mp4</a
-						>
-					</div>
-				</figure>
-			</div>
-			<div id="2801e5c7-84bf-4a99-8a7a-9da626ef39a0" style="width:50%" class="column">
-				<figure id="2a13eb7d-28a2-4bc0-b183-11d09997b66b">
-					<div class="source">
-						<a href="./files/video2-exp.mp4"
-							>https://prod-files-secure.s3.us-west-2.amazonaws.com/3479c0fa-74b8-42d2-9988-b96b70aa123c/431745d2-a72e-404c-89ce-4cc490179166/video2-exp.mp4</a
-						>
-					</div>
-				</figure>
-			</div>
-		</div>
-		<p id="be5c3362-07dd-4fd9-a8e0-eb5c85a09350" class=""></p>
-		<figure id="cc7bbe19-b5be-4997-a5f0-8d0784ce7e2d" class="image" style="text-align:left">
-			<a href="./files/RF2A1963_-__Triennale_Milano_-_foto_Gianluca_Di_Ioia.jpg"
-				><img
-					style="width:864px"
-					src="./files/RF2A1963_-__Triennale_Milano_-_foto_Gianluca_Di_Ioia.jpg"
-				/></a
-			>
-		</figure>
-		<p id="b9f15be8-f39c-413e-92b0-55c2a5b2b41f" class=""></p>
-		<div id="3347e155-a5a3-482e-82a7-e1a7434485d7" class="column-list">
-			<div id="e3fdc31f-abdf-4150-97cc-8f6084a52c65" style="width:50%" class="column">
-				<figure id="9e939952-0f29-40a8-b10b-45ae03704312" class="image">
-					<a href="./files/reaction-diffusion-2A-14dpi.bmp"
-						><img style="width:560px" src="./files/reaction-diffusion-2A-14dpi.bmp" /></a
-					>
-				</figure>
-			</div>
-			<div id="3bd2cf6e-a926-4388-8cdd-0bbe73613e27" style="width:50%" class="column">
-				<figure id="633b3d5b-3391-4a1b-b2c4-bbfe5a8bbdb8">
-					<div class="source">
-						<a href="./files/video1-exp.mp4"
-							>https://prod-files-secure.s3.us-west-2.amazonaws.com/3479c0fa-74b8-42d2-9988-b96b70aa123c/c2b34bcb-fd45-4e37-b1c1-81135e296049/video1-exp.mp4</a
-						>
-					</div>
-				</figure>
-			</div>
-		</div>
-	</div>
-</article>
-<span class="sans" style="font-size:14px;padding-top:2em"></span> -->
