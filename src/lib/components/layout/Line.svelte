@@ -1,1 +1,0 @@
-<hr class="self-stretch" />

@@ -28,7 +28,8 @@ const config = {
 
 		alias: {
 			$database: './src/routes/(database)',
-			$cms: './src/__cms'
+			$cms: './src/__cms',
+			$components: './src/components'
 		}
 	}
 };
