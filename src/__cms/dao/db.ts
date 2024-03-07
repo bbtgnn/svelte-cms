@@ -8,7 +8,7 @@ import type {
 	CollectionSchema,
 	DocumentName,
 	Document
-} from '$modules/types';
+} from '../types';
 import database_config from '$database/config';
 
 import {

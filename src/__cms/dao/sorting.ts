@@ -1,4 +1,4 @@
-import type { Collection, CollectionName, Document } from '$modules/types';
+import type { Collection, CollectionName, Document } from '../types';
 import { Type as T, type Static } from '@sinclair/typebox';
 import { Value } from '@sinclair/typebox/value';
 import _ from 'lodash';

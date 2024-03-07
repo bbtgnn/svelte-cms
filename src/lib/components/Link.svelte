@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { href as hrefAdapter } from '$modules/utils';
+	import { href as hrefAdapter } from '$cms/utils';
 
 	export let href: string;
 

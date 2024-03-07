@@ -7,7 +7,7 @@ import type { Plugin } from 'vite';
 //
 
 const collections_directory = 'src/routes/(database)';
-const output_file = 'src/_modules/database_index.ts';
+const output_file = 'src/__cms/database_index.ts';
 
 export function save_database_index_plugin(): Plugin {
 	return {

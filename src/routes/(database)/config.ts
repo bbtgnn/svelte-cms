@@ -1,5 +1,5 @@
-import * as F from '$modules/fields'; // eslint-disable-line
-import { database } from '$modules/database';
+import * as F from '../../__cms/fields'; // eslint-disable-line
+import { database } from '../../__cms/database';
 
 /* --- */
 

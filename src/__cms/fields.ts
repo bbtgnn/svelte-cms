@@ -3,7 +3,7 @@ import { Type as T, type StaticDecode } from '@sinclair/typebox';
 import { database_index, database_index_schema } from './database_index';
 import type { CollectionName } from './database';
 
-import { db } from '$modules';
+import { db } from '.';
 
 //
 
