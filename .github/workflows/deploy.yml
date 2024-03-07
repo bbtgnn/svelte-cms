@@ -25,7 +25,7 @@ jobs:
         run: npm install
       - name: Build
         env:
-          BASE_PATH: '/${{ github.event.repository.name }}'
+          REPO_NAME: '/${{ github.event.repository.name }}'
         run: |
           npm run build
       - name: Upload Artifacts
