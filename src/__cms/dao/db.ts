@@ -82,7 +82,7 @@ export function get_collection<C extends CollectionName>(
 ) {
 	return pipe(
 		Effect.all([
-			get_base_documents({ path_includes: `${base}/${collection_name}` }),
+			get_base_documents({ path_includes: `${base}/${collection_name}` }), // TODO - Fix
 			get_collection_schema(collection_name)
 		]),
 		Effect.flatMap(([documents, schema]) => parse_base_documents(documents, schema)),
