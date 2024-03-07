@@ -9,7 +9,7 @@ import type {
 	DocumentName,
 	Document
 } from '$modules/types';
-import database_config from '$database/_config';
+import database_config from '$database/config';
 
 import {
 	get_base_document,

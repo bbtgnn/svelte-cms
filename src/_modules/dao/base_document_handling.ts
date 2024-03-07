@@ -11,7 +11,7 @@ import _ from 'lodash';
 import { Type as T, type Static, type TAnySchema, type StaticDecode } from '@sinclair/typebox';
 import { Value, type ValueError } from '@sinclair/typebox/value';
 
-import document_module_record from '$database/_export';
+import document_module_record from '$database/__export';
 
 import { href } from '../utils';
 
