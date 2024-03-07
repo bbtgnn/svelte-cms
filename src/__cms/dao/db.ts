@@ -57,14 +57,14 @@ export function create<C extends CollectionName>(
 export function get_document<C extends CollectionName>(
 	collection_name: C,
 	document_name: DocumentName<C>
-): Document<C> | Error {
+): Document<C> | undefined {
 	return pipe(
 		Effect.all([
 			get_base_document(`${collection_name}/${document_name}`),
 			get_collection_schema(collection_name)
 		]),
 		Effect.flatMap(([base_document, schema]) => parse_base_document(base_document, schema)),
-		Effect.catchAll((e) => Effect.succeed(e)),
+		Effect.catchAll(() => Effect.succeed(undefined)),
 		Effect.runSync
 	);
 }
@@ -80,6 +80,13 @@ export function get_collection<C extends CollectionName>(
 		]),
 		Effect.flatMap(([documents, schema]) => parse_base_documents(documents, schema)),
 		Effect.map((documents) => sort_documents(documents, options.sort)),
+		Effect.match({
+			onFailure: (e) => {
+				console.log(e);
+				return [];
+			},
+			onSuccess: (a) => a
+		}),
 		Effect.runSync
 	);
 }

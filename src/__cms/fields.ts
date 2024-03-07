@@ -3,7 +3,7 @@ import { Type as T, type StaticDecode } from '@sinclair/typebox';
 import { database_index, database_index_schema } from './database_index';
 import type { CollectionName } from './database';
 
-import { db } from '.';
+import { get_document } from '.';
 
 //
 
@@ -72,7 +72,7 @@ export function Relation<C extends CollectionName>(collection_name: C) {
 		.Decode((document) => ({
 			collection: collection_name,
 			document,
-			get: () => db.get_document(collection_name, document)
+			get: () => get_document(collection_name, document)
 		}))
 		.Encode((field) => field.document);
 }
