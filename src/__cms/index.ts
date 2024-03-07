@@ -1,2 +1,2 @@
 export { database } from './database';
-export { db } from './dao';
+export { get_collection, get_document, get_paths, create } from './dao/db';
