@@ -41,7 +41,7 @@ export function get_paths(): string[] {
 export function create<C extends CollectionName>(
 	collection_name: C,
 	data: CollectionInput<C>
-): Collection<C> {
+): Collection<C> | unknown {
 	return pipe(
 		get_collection_schema(collection_name),
 		Effect.flatMap((schema) =>
@@ -50,6 +50,13 @@ export function create<C extends CollectionName>(
 				catch: () => new Error(`Invalid data: ${JSON.stringify(data, null, 2)}`)
 			})
 		),
+		Effect.match({
+			onFailure: (e) => {
+				console.log(e);
+				return data;
+			},
+			onSuccess: (a) => a
+		}),
 		Effect.runSync
 	);
 }

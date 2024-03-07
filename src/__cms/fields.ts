@@ -61,13 +61,13 @@ export const File = () => T.String({});
 
 type Relation<C extends CollectionName> = (typeof database_index_schema)['properties'][C];
 
-export function BaseRelation<C extends CollectionName>(collection_name: C): Relation<C> {
+function BaseRelation<C extends CollectionName>(collection_name: C): Relation<C> {
 	const collection_entries = database_index[collection_name];
 	// @ts-expect-error - Avoid type overlap
 	return T.Union(collection_entries.map((name: CollectionEntry<C>) => T.Literal(name)));
 }
 
-export function Relation<C extends CollectionName>(collection_name: C) {
+export const Relation = <C extends CollectionName>(collection_name: C) => {
 	return T.Transform(BaseRelation(collection_name))
 		.Decode((document) => ({
 			collection: collection_name,
@@ -75,6 +75,6 @@ export function Relation<C extends CollectionName>(collection_name: C) {
 			get: () => get_document(collection_name, document)
 		}))
 		.Encode((field) => field.document);
-}
+};
 
 export type RelationField<C extends CollectionName> = StaticDecode<ReturnType<typeof Relation<C>>>;
