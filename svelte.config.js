@@ -23,12 +23,17 @@ const config = {
 		}),
 
 		paths: {
-			base: process.argv.includes('dev') ? '' : process.env.REPO_NAME
+			base: process.argv.includes('dev')
+				? ''
+				: process.env.REPO_NAME
+					? `/${process.env.REPO_NAME}`
+					: ''
 		},
 
 		alias: {
 			$database: './src/routes/(database)',
-			$modules: './src/_modules'
+			$cms: './src/__cms',
+			$components: './src/components'
 		}
 	}
 };

@@ -1,10 +1,8 @@
 <script lang="ts">
-	import Navbar from '$lib/components/Navbar.svelte';
-	import '../app.pcss';
+	import Navbar from '$components/Navbar.svelte';
+	import '../styles.css';
 </script>
 
 <Navbar />
 
-<div class="pt-8">
-	<slot />
-</div>
+<slot />
