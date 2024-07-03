@@ -1,9 +1,9 @@
 <script lang="ts">
-	import * as S from '@effect/schema/Schema';
+	import { Schema as S } from '@effect/schema';
 
-	const Person = S.struct({
-		name: S.string,
-		age: S.number
+	const Person = S.Struct({
+		name: S.String,
+		age: S.Number
 	});
 
 	console.log(Person);

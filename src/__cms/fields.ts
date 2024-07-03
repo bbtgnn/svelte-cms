@@ -4,6 +4,7 @@ import { database_index, database_index_schema } from './database_index';
 import type { CollectionName } from './database';
 
 import { get_document } from '.';
+import { Schema } from '@effect/schema';
 
 //
 
@@ -78,3 +79,5 @@ export const Relation = <C extends CollectionName>(collection_name: C) => {
 };
 
 export type RelationField<C extends CollectionName> = StaticDecode<ReturnType<typeof Relation<C>>>;
+
+/** */

@@ -1,4 +1,4 @@
-import { pipe, Effect, ReadonlyArray as A, Either as E } from 'effect';
+import { pipe, Effect, Array as A, Either as E } from 'effect';
 // Effect must be imported before other imports that use effect!
 
 import type {
